@@ -1,10 +1,12 @@
 #pragma once
+#include "Menu.h"
 class OlaDoc
 {
 	Menu MenuMain;
 
 
 public:
-	void startProgram()
+	//TO start the olaDoc program
+	void startProgram();
 };
 

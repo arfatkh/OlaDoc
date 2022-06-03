@@ -128,12 +128,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Doctor.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="OlaDoc.h" />
     <ClInclude Include="Patient.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Doctor.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="OlaDoc.cpp" />
     <ClCompile Include="Patient.cpp" />
     <ClCompile Include="User.cpp" />

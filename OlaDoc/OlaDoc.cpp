@@ -2,6 +2,7 @@
 
 void OlaDoc::startProgram()
 {
+	MenuMain.displayMainMenu();
 
 
 }
