@@ -1,5 +1,9 @@
 #include "OlaDoc.h"
+#include <iostream>
+#include <fstream>
+#include "Patient.h"
 
+using namespace std;
 /*
 
 Name : Muhammad Arfat
@@ -40,7 +44,48 @@ int main()
 	OlaDoc OlaDoc1;
 
 
+
 	OlaDoc1.startProgram();
+
+
+
+    cout << "DIsplaying Name" << endl;
+    Patient P;
+
+
+    ifstream fin;
+    fin.open("patients.dat", ios::in | ios::binary);
+    int x = 0;
+    while (fin.read((char*)&P, sizeof(P)))
+    {
+        
+        cout<<x++<<" " << P.getName() << endl;
+        
+      
+    }
+
+
+    fin.close();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	return 0;

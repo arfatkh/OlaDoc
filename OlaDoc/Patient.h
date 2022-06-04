@@ -18,5 +18,5 @@ class Patient :
         double balance;
 public:
     friend bool Menu::PatientRegistration();
+    int getAge() { return age; }
 };
-

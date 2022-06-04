@@ -72,7 +72,7 @@ void Menu::displayLoginMenu()
 void Menu::displayRegisterMenu()
 {
 	int choice;
-	cout << "================ Registration Menu =================" << endl;
+	cout << "\n================ Registration Menu =================\n" << endl;
 	cout << "1- Register as Patient." << endl;
 	cout << "2- Register as Doctor" << endl;
 	cout << "Select an Option ::> ";
@@ -105,11 +105,32 @@ bool Menu::PatientRegistration()
 
 	Patient _tempPatient;
 	system("cls");
-	cout << "\n================== PATIENT REGISTRATION PORTAL ================== " << endl;
+	cout << "\n\t================== PATIENT REGISTRATION PORTAL ==================\n " << endl;
 	
-	cout << "Full Name :";
-	cin.getline(_tempPatient.name,30);
-	cin.ignore();
+	
+
+		cout << "Full Name :";
+		cin.ignore();
+		cin.getline(_tempPatient.name, sizeof(_tempPatient.name));
+
+	/*	while (true)
+		{
+			if(strlen(_tempPatient.name) == 0)
+			{ 
+				cout << "Please enter a valid name!" << endl;
+				cout << "Full Name :";
+		
+				
+			
+			}
+			else
+			{
+				break;
+			}
+			
+		}
+	*/
+
 
 	ofstream fout;
 	//Opening the Patient data file
