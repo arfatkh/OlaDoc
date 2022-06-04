@@ -1,5 +1,6 @@
 #pragma once
 #include "User.h"
+#include "Menu.h"
 
 
 class Patient :
@@ -15,7 +16,7 @@ class Patient :
         char diseases[100];
         int age;
         double balance;
-
-
+public:
+    friend bool Menu::PatientRegistration();
 };
 

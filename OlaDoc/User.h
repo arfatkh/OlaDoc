@@ -1,6 +1,7 @@
 #pragma once
 class User
 {
+protected:
 	char name[30];
 	char userName[20];
 	char password[60];

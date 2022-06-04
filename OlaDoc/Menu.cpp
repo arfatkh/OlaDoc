@@ -1,10 +1,14 @@
 #include "Menu.h"
 #include <iostream>
+#include <fstream>
+#include "Patient.h"
 
 
 using std::cout;
 using std::endl;
 using std::cin;
+using std::ifstream;
+using std::ofstream;
 
 
 
@@ -67,7 +71,68 @@ void Menu::displayLoginMenu()
 }
 void Menu::displayRegisterMenu()
 {
-	cout << "Registration Menu" << endl;
+	int choice;
+	cout << "================ Registration Menu =================" << endl;
+	cout << "1- Register as Patient." << endl;
+	cout << "2- Register as Doctor" << endl;
+	cout << "Select an Option ::> ";
+	cin >> choice;
+
+
+	switch (choice)
+	{
+	case 1:
+		PatientRegistration();
+		break;
+
+	case 2:
+		//DoctorRegistration();
+		break;
+	default:
+		cout << "Invalid Choice Select Again !!!" << endl;
+		displayRegisterMenu();
+		break;
+
+		break;
+	}
+
+
+}
+
+bool Menu::PatientRegistration()
+{
+	char PATIENT_FILE_NAME[20] = "patients.dat";
+
+	Patient _tempPatient;
+	system("cls");
+	cout << "\n================== PATIENT REGISTRATION PORTAL ================== " << endl;
+	
+	cout << "Full Name :";
+	cin.getline(_tempPatient.name,30);
+	cin.ignore();
+
+	ofstream fout;
+	//Opening the Patient data file
+	fout.open(PATIENT_FILE_NAME, std::ios::app | std::ios::binary);
+
+
+	//If file fails to open
+	if (!fout.is_open())
+	{
+		cout << "There was a problem trying to open the file [Contact Sys Admin][Error 1] " << endl;
+		return false;
+	}
+	//Writing to the File
+	fout.write((char*)&_tempPatient, sizeof(class Patient));
+
+	cout << "Patient Successfully Added."<<endl;
+
+	//Closing the Patient Data File
+	fout.close();
+
+
+
+
 
 
 }
