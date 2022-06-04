@@ -3,7 +3,7 @@
 void OlaDoc::startProgram()
 {
 	MenuMain.displayMainMenu();
-	MenuMain.displayDoctorMenu();
+	//MenuMain.displayDoctorMenu();
 
 
 }

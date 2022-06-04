@@ -6,5 +6,7 @@ public:
 	void displayAdminMenu();
 	void displayPatientMenu();
 	void displayDoctorMenu();
+	void displayLoginMenu();
+	void displayRegisterMenu();
 };
 
