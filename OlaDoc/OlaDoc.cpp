@@ -49,9 +49,8 @@ int main()
 
 
 
-    cout << "DIsplaying Name" << endl;
+    cout << "Displaying Name" << endl;
     Patient P;
-
 
     ifstream fin;
     fin.open("patients.dat", ios::in | ios::binary);
@@ -59,7 +58,7 @@ int main()
     while (fin.read((char*)&P, sizeof(P)))
     {
         
-        cout<<x++<<" " << P.getName() << endl;
+        cout<<x++<<" " << P.getName() <<", " << P.getID() << endl;
         
       
     }

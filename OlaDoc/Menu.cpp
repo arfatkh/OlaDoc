@@ -104,7 +104,7 @@ bool Menu::PatientRegistration()
 	char PATIENT_FILE_NAME[20] = "patients.dat";
 
 	Patient _tempPatient;
-	system("cls");
+	//system("cls");
 	cout << "\n\t================== PATIENT REGISTRATION PORTAL ==================\n " << endl;
 	
 	
@@ -112,6 +112,8 @@ bool Menu::PatientRegistration()
 		cout << "Full Name :";
 		cin.ignore();
 		cin.getline(_tempPatient.name, sizeof(_tempPatient.name));
+
+	
 
 	/*	while (true)
 		{

@@ -8,8 +8,15 @@ protected:
 	char address[150];
 	char mobileNo[11];
 	char email[30];
+	virtual void generateID()=0;//To generate random ids for users
+	virtual bool IDisAvailable(char* ID)=0; //Checks if an ID is available
 
 public:
+	
+
+	
+	
+
 	char* getName();
 	char* getUserName();
 	char* getEmail();

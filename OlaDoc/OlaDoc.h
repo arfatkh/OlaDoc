@@ -8,5 +8,6 @@ class OlaDoc
 public:
 	//TO start the olaDoc program
 	void startProgram();
+	
 };
 
