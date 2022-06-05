@@ -165,7 +165,7 @@ bool User::setPassword()
 {
 	char _tempPassword[60];
 
-	
+
 
 
 	//Check length
@@ -179,19 +179,44 @@ bool User::setPassword()
 
 	do
 	{
+
+		LenCheck = false;
+		UpperCheck = false;
+		LowerCheck = false;
+		SpecialCharCheck = false;
+		DigitCheck = false;
+
 		std::cout << "Choose a Password :";
 		std::cin.getline(_tempPassword, sizeof(_tempPassword));
 
-		
+
+
 
 		//Checking 8 digit minimun length
 		LenCheck = strlen(_tempPassword) > 8 ? true : false;
 
 		//Range based for loop
-		//Checking uppercase
-		for (char& ch : _tempPassword)
+		//Checking lowercase
+		for (char ch : _tempPassword)
 		{
-			if (isupper(ch))
+			if (ch == 0)
+				break;
+			if (ch >= 97 && ch <= 122)
+			{
+				LowerCheck = true;
+				break;
+			}
+
+
+		}
+
+
+		//Checking uppercase
+		for (char ch : _tempPassword)
+		{
+			if (ch == 0)
+				break;
+			if (ch >= 65 && ch <= 90)
 			{
 				UpperCheck = true;
 				break;
@@ -200,17 +225,7 @@ bool User::setPassword()
 		}
 
 
-		//Checking lowercase
-		for (char& ch : _tempPassword)
-		{
-			if (islower(ch))
-			{
-				LowerCheck = true;
-				break;
-			}
 
-
-		}
 
 
 		//Checking digit
@@ -229,6 +244,8 @@ bool User::setPassword()
 
 		for (char& ch : _tempPassword)
 		{
+			if (ch == 0)
+				break;
 			// Ascii Special char ARanges 32–47 / 58–64 / 91–96 / 123–126
 			if ((ch >= 32 && ch <= 47) || (ch >= 58 && ch <= 64) || (ch >= 91 && ch <= 96) || (ch >= 123 && ch <= 126))
 			{
@@ -240,23 +257,19 @@ bool User::setPassword()
 		}
 		if (!LenCheck) std::cout << "Password must be atleast 8 characters long!.\n";
 		if (!UpperCheck) std::cout << "Password must contain atleast 1 UpperCase character!.\n";
-		if (!LowerCheck) std::cout << "Password must contain atleast 1 LoweCase character!.\n";
+		if (!LowerCheck) std::cout << "Password must contain atleast 1 LowerCase character!.\n";
 		if (!DigitCheck) std::cout << "Password must contain atleast 1 Digit!.\n";
 		if (!SpecialCharCheck) std::cout << "Password must contain atleast 1 Special character!.\n";
 
 
-
-		LenCheck = false;
-		UpperCheck = false;
-		LowerCheck = false;
-		SpecialCharCheck = false;
-		DigitCheck = false;
 
 
 
 
 
 	} while (!(LenCheck && UpperCheck && LowerCheck && SpecialCharCheck && DigitCheck));
+
+
 
 	return true;
 }

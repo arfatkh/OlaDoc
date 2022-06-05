@@ -404,6 +404,7 @@ bool Menu::DoctorRegistration()
 
 	_tempDoctor.setUserName();
 	
+	_tempDoctor.setPassword();
 	
 
 	cout << "Password :";
