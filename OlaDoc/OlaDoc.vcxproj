@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Admin.h" />
     <ClInclude Include="Doctor.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="OlaDoc.h" />
@@ -134,6 +135,7 @@
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Admin.cpp" />
     <ClCompile Include="Doctor.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="OlaDoc.cpp" />

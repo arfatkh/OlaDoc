@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 
+#include"OlaDoc.h"
 #include "Patient.h"
 #include "Doctor.h"
 
@@ -12,6 +13,56 @@ using std::endl;
 using std::cin;
 using std::ifstream;
 using std::ofstream;
+
+
+
+
+
+
+//Global functons to be removed later
+void viewDoctors()
+{
+	const char *DOCTOR_FILE_NAME = "doctors.dat";
+	system("cls");
+	cout << "\n\n================= Doctors List ======================\n\n " << endl;
+	Doctor D;
+
+	ifstream fin;
+	fin.open(DOCTOR_FILE_NAME, std::ios::in | std::ios::binary);
+
+	int x = 0;
+	while (fin.read((char*)&D, sizeof(D)))
+	{
+		cout << "========================================================================\n";
+		cout << " Name :" << D.getName() << "\n ID:" << D.getID() << endl;
+		cout << "========================================================================\n";
+
+	}
+
+
+	fin.close();
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -47,7 +98,41 @@ void Menu::displayMainMenu()
 }
 void Menu::displayAdminMenu()
 {
-	cout << "Oladoc Admin Menu" << endl;
+	cout << "==================== Oladoc Admin Menu ==================" << endl;
+
+
+	cout << "[1] Add Doctor \n";
+	cout << "[2] View Doctor \n";
+	cout << "[3] Delete Doctor \n";
+	cout << "[4] Edit Doctor's Data/Schedule\n";
+	cout << "[5] View Patient \n";
+	cout << "[6] View Appoitments \n";
+	cout << "[7] Edit Appoitments \n";
+
+	cout<<"====================================\n";
+	cout << "Choose an Option :";
+	int choice;
+	cin >> choice;
+	cin.ignore();
+
+	switch (choice)
+	{
+	case 1:
+	{
+
+		viewDoctors();
+		break;
+
+	}
+	default:
+		break;
+	}
+	
+
+
+
+
+
 
 
 }
@@ -70,6 +155,8 @@ void Menu::displayDoctorMenu()
 void Menu::displayLoginMenu()
 {
 	cout << "Login Menu" << endl;
+
+	displayAdminMenu();
 
 
 
@@ -95,11 +182,13 @@ void Menu::displayRegisterMenu()
 		DoctorRegistration();
 		break;
 	default:
+	{
 		cout << "Invalid Choice Select Again !!!" << endl;
 		displayRegisterMenu();
 		break;
+	}
 
-			}
+	}
 
 
 }
