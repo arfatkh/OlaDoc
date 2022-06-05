@@ -11,7 +11,8 @@
 
 
 //Getters For User
-char* User::getName(){return name;}
+char* User::getName() { return name; }
+char* User::getCNIC() { return CNIC; }
 char* User::getUserName() { return userName; }
 char* User::getEmail(){return email;}
 char* User::getMobileNo(){return mobileNo;}
@@ -111,21 +112,18 @@ bool User::setUserName()
 bool User::UserNameIsAvailable(char* _string)
 {
 
-	const char* DOCTOR_FILE_NAME = "doctors.dat";
-	const char* PATIENT_FILE_NAME = "patients.dat";
-	
-
 
 	//Check in doctors Data
 	Doctor D;
 	std::ifstream fin;
-	fin.open(DOCTOR_FILE_NAME, std::ios::in | std::ios::binary);
+	fin.open("doctors.dat", std::ios::in | std::ios::binary);
 
 	while (fin.read((char*)&D, sizeof(D)))
 	{
 
 		if (!strcmp(D.getUserName(), _string))
 			return false;
+
 	}
 
 	fin.close();
@@ -135,9 +133,10 @@ bool User::UserNameIsAvailable(char* _string)
 	//Check in Patients Data
 	Patient P;
 
-	fin.open(PATIENT_FILE_NAME, std::ios::in | std::ios::binary);
+	std::ifstream fin1;
+	fin1.open("patients.dat", std::ios::in | std::ios::binary);
 
-	while (fin.read((char*)&P, sizeof(P)))
+	while (fin1.read((char*)&P, sizeof(P)))
 	{
 
 		if (!strcmp(P.getUserName(), _string))
@@ -147,7 +146,7 @@ bool User::UserNameIsAvailable(char* _string)
 
 	}
 
-	fin.close();
+	fin1.close();
 
 
 
@@ -276,6 +275,7 @@ bool User::setPassword()
 	bool passMatch = true;
 	do
 	{
+		passMatch = true;
 		if (!passMatch)
 			std::cout << "Both Passwords do not match !!\n";
 
@@ -300,10 +300,127 @@ bool User::setCNIC()
 
 	char _tempCNIC[20];
 
-	//std::cout << "Choose a Username :";
-	//std::cin.getline(_tempUsername, sizeof(_tempUsername));
+
+
+
+	bool ValidCNIC = true;
+
+	do
+	{
+
+		if (!ValidCNIC)
+			std::cout << "Invalid CNIC NO !!\n";
+
+		ValidCNIC = true;
+
+		std::cout << "CNIC [11111-1111111-1] :";
+		std::cin.getline(_tempCNIC, sizeof(_tempCNIC));
+
+
+
+		if (strlen(_tempCNIC) != 15)
+		{
+			ValidCNIC = false;
+		}
+
+		if (_tempCNIC[5] != '-' || _tempCNIC[13] != '-')
+			ValidCNIC = false;
+
+		for (char& ch : _tempCNIC)
+		{
+
+			if (ch == 0)
+				break;
+
+			if (!((ch >= '0' && ch <= '9') || ch == '-'))
+				ValidCNIC = false;
+
+		}
+
+
+	} while (!ValidCNIC);
+
+
+
+
+
+	while (!CNICAvailable(_tempCNIC))
+	{
+		std::cout << "CNIC Already Exists!!\n";
+
+		//std::cin.ignore(1000, '\n');
+
+
+		std::cout << "CNIC [11111-1111111-1] :";
+		std::cin.getline(_tempCNIC, sizeof(_tempCNIC));
+
+
+
+	}
+
+
+	strcpy_s(CNIC, _tempCNIC);
 
 	return 1;
+
+
+
+}
+
+
+bool User::CNICAvailable(char* _cnic)
+{
+
+
+
+	
+
+
+
+	//Check in doctors Data
+	Doctor D;
+	std::ifstream fin;
+	fin.open(DOCTOR_FILE_NAME, std::ios::in | std::ios::binary);
+
+	while (fin.read((char*)&D, sizeof(D)))
+	{
+
+		if (!strcmp(D.getCNIC(), _cnic))
+			return false;
+	}
+
+	fin.close();
+
+
+
+	//Check in Patients Data
+	Patient P;
+
+	fin.open(PATIENT_FILE_NAME, std::ios::in | std::ios::binary);
+
+	while (fin.read((char*)&P, sizeof(P)))
+	{
+
+		if (!strcmp(P.getCNIC(), _cnic))
+			return false;
+
+
+
+	}
+
+	fin.close();
+
+
+
+
+	return true;
+
+
+
+
+
+
+
 
 
 

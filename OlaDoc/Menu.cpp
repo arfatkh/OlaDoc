@@ -284,53 +284,49 @@ bool Menu::PatientRegistration()
 
 		_tempPatient.setPassword();
 
-		
+		_tempPatient.setCNIC();
 	
 
 		//cout << "Confirm password :";
 		//cin.ignore();
 		//cin.getline(_tempPatient.name, sizeof(_tempPatient.name));
 
-		cout << "CNIC :";
-		
-		cin.getline(_tempPatient.CNIC, sizeof(_tempPatient.CNIC));
+
+		//cout << "Date Of Birth [ddmmyyyy] :";
+		//cin.getline(_tempPatient.dateOfBirth, sizeof(_tempPatient.dateOfBirth));
+
+		//cout << "Gender [ M /F / O(for Others) ] :";
+		//cin.getline(_tempPatient.gender, sizeof(_tempPatient.gender));
+
+		//cout << "Address :";
+		//cin.getline(_tempPatient.address, sizeof(_tempPatient.address));
+
+		//cout << "Mobile No";
+		//cin.getline(_tempPatient.mobileNo, sizeof(_tempPatient.mobileNo));
+
+		//cout << "Email :";
+		//cin.getline(_tempPatient.email, sizeof(_tempPatient.email));
+
+		//cout << "\n====================== Medical Data ===================\n" << endl;
+		//cout << "Leave Blank If Not Available :\n";
+		//
+
+		//cout << "Blood Group :";
+		//cin.getline(_tempPatient.bloodGroup, sizeof(_tempPatient.bloodGroup));
 
 
-		cout << "Date Of Birth [ddmmyyyy] :";
-		cin.getline(_tempPatient.dateOfBirth, sizeof(_tempPatient.dateOfBirth));
-
-		cout << "Gender [ M /F / O(for Others) ] :";
-		cin.getline(_tempPatient.gender, sizeof(_tempPatient.gender));
-
-		cout << "Address :";
-		cin.getline(_tempPatient.address, sizeof(_tempPatient.address));
-
-		cout << "Mobile No";
-		cin.getline(_tempPatient.mobileNo, sizeof(_tempPatient.mobileNo));
-
-		cout << "Email :";
-		cin.getline(_tempPatient.email, sizeof(_tempPatient.email));
-
-		cout << "\n====================== Medical Data ===================\n" << endl;
-		cout << "Leave Blank If Not Available :\n";
-		
-
-		cout << "Blood Group :";
-		cin.getline(_tempPatient.bloodGroup, sizeof(_tempPatient.bloodGroup));
+		//cout << "Martial Status [ M(arried) / U(nmarried) / D(ivorced) / W(idowed) ] :";
+		//cin.getline(_tempPatient.martialStatus, sizeof(_tempPatient.martialStatus));
 
 
-		cout << "Martial Status [ M(arried) / U(nmarried) / D(ivorced) / W(idowed) ] :";
-		cin.getline(_tempPatient.martialStatus, sizeof(_tempPatient.martialStatus));
+		//cout << "Allergies (if any) [Seperate with commas(,) ] :";
+		//cin.getline(_tempPatient.allergies, sizeof(_tempPatient.allergies));
 
+		//cout << "Perscriptions (if any) [Seperate with commas(,) ] :";
+		//cin.getline(_tempPatient.prescriptions, sizeof(_tempPatient.prescriptions));
 
-		cout << "Allergies (if any) [Seperate with commas(,) ] :";
-		cin.getline(_tempPatient.allergies, sizeof(_tempPatient.allergies));
-
-		cout << "Perscriptions (if any) [Seperate with commas(,) ] :";
-		cin.getline(_tempPatient.prescriptions, sizeof(_tempPatient.prescriptions));
-
-		cout << "Diseases (if any) [Seperate with commas(,) ] :";
-		cin.getline(_tempPatient.diseases, sizeof(_tempPatient.diseases));
+		//cout << "Diseases (if any) [Seperate with commas(,) ] :";
+		//cin.getline(_tempPatient.diseases, sizeof(_tempPatient.diseases));
 
 		
 
@@ -377,6 +373,7 @@ bool Menu::PatientRegistration()
 	//Closing the Patient Data File
 	fout.close();
 
+	system("pause");
 
 
 
@@ -404,20 +401,11 @@ bool Menu::DoctorRegistration()
 	_tempDoctor.setUserName();
 	
 	_tempDoctor.setPassword();
+
+	_tempDoctor.setCNIC();
 	
 
 	
-	
-
-	//cout << "Confirm password :";
-	//cin.ignore();
-	//cin.getline(_tempDoctor.name, sizeof(_tempDoctor.name));
-
-	cout << "CNIC :";
-
-	cin.getline(_tempDoctor.CNIC, sizeof(_tempDoctor.CNIC));
-
-
 
 	cout << "Gender [ M /F / O(for Others) ] :";
 	cin.getline(_tempDoctor.gender, sizeof(_tempDoctor.gender));
@@ -489,6 +477,8 @@ bool Menu::DoctorRegistration()
 
 	//Closing the Doctor Data File
 	fout.close();
+	system("pause");
+
 
 }
 
