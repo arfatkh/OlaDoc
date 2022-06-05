@@ -11,15 +11,18 @@ protected:
 	char mobileNo[11];
 	char email[30];
 	char CNIC[20];
+	char dateOfBirth[10];
 	char gender[10];
+	
 	virtual void generateID()=0;//To generate random ids for users
 	virtual bool IDisAvailable(char* ID)=0; //Checks if an ID is available
+	
 	bool setUserName();
 	bool UserNameIsAvailable(char* _string);
 	bool setPassword();
 	bool setCNIC();
 	bool CNICAvailable(char* _cnic);//As per requirement both patient and doc databse will be checked
-
+	bool setDOB();
 
 public:
 	

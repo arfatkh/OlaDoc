@@ -284,16 +284,11 @@ bool Menu::PatientRegistration()
 
 		_tempPatient.setPassword();
 
-		_tempPatient.setCNIC();
+		_tempPatient.setCNIC();	
+
+		_tempPatient.setDOB();
+
 	
-
-		//cout << "Confirm password :";
-		//cin.ignore();
-		//cin.getline(_tempPatient.name, sizeof(_tempPatient.name));
-
-
-		//cout << "Date Of Birth [ddmmyyyy] :";
-		//cin.getline(_tempPatient.dateOfBirth, sizeof(_tempPatient.dateOfBirth));
 
 		//cout << "Gender [ M /F / O(for Others) ] :";
 		//cin.getline(_tempPatient.gender, sizeof(_tempPatient.gender));
@@ -403,6 +398,8 @@ bool Menu::DoctorRegistration()
 	_tempDoctor.setPassword();
 
 	_tempDoctor.setCNIC();
+
+	_tempDoctor.setDOB();
 	
 
 	

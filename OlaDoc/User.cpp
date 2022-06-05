@@ -299,10 +299,6 @@ bool User::setCNIC()
 	std::cout << "CNIC :";
 
 	char _tempCNIC[20];
-
-
-
-
 	bool ValidCNIC = true;
 
 	do
@@ -425,6 +421,60 @@ bool User::CNICAvailable(char* _cnic)
 
 
 
+
+
+}
+
+
+
+bool User::setDOB()
+{
+	
+
+	char _tempDOB[10];
+	bool ValidDOB = true;
+
+	do
+	{
+
+		if (!ValidDOB)
+			std::cout << "Invalid Date of Birth | Follow ddmmyyyy format !!\n";
+
+		ValidDOB = true;
+
+		std::cout << "Date Of Birth[ddmmyyyy] :";
+
+		std::cin.getline(_tempDOB, sizeof(_tempDOB));
+
+
+
+		if (strlen(_tempDOB) != 8)
+		{
+			ValidDOB = false;
+		}
+
+		
+
+		for (char& ch : _tempDOB)
+		{
+
+			if (ch == 0)
+				break;
+
+			if (!(ch >= '0' && ch <= '9'))
+				ValidDOB = false;
+
+		}
+
+
+	} while (!ValidDOB);
+
+
+
+	strcpy_s(dateOfBirth, _tempDOB);
+
+
+	return true;
 
 
 }
