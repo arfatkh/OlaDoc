@@ -10,7 +10,7 @@ public:
 
 	void displayRegisterMenu(); //Menu for Registring new users
 	bool PatientRegistration(); // Specific for patient's Registration.
-	//void DoctorRegistration(); //Specific for Doctors's Registration.
+	bool DoctorRegistration(); //Specific for Doctors's Registration.
 
 };
 

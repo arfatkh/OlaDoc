@@ -6,10 +6,10 @@
 class Patient :
     public User
 {
+    char PATIENT_FILE_NAME[20] = "patients.dat";
     char patientID[10];
     char allergies[100];
         char dateOfBirth[10];
-        char gender[10];
         char bloodGroup[10];
         char martialStatus[10];
         char prescriptions[100];
