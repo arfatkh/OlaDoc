@@ -255,12 +255,15 @@ bool User::setPassword()
 
 
 		}
+		if(!(LenCheck && UpperCheck && LowerCheck && SpecialCharCheck && DigitCheck))
+		std::cout << "--------------------------------------\n";
 		if (!LenCheck) std::cout << "Password must be atleast 8 characters long!.\n";
 		if (!UpperCheck) std::cout << "Password must contain atleast 1 UpperCase character!.\n";
 		if (!LowerCheck) std::cout << "Password must contain atleast 1 LowerCase character!.\n";
 		if (!DigitCheck) std::cout << "Password must contain atleast 1 Digit!.\n";
 		if (!SpecialCharCheck) std::cout << "Password must contain atleast 1 Special character!.\n";
-
+		if (!(LenCheck && UpperCheck && LowerCheck && SpecialCharCheck && DigitCheck))
+			std::cout << "--------------------------------------\n";
 
 
 
@@ -269,7 +272,42 @@ bool User::setPassword()
 
 	} while (!(LenCheck && UpperCheck && LowerCheck && SpecialCharCheck && DigitCheck));
 
+	char reEnterPass[60];
+	bool passMatch = true;
+	do
+	{
+		if (!passMatch)
+			std::cout << "Both Passwords do not match !!\n";
 
+		std::cout << "Confirm your Password :";
+		std::cin.getline(reEnterPass, sizeof(reEnterPass));
+
+		passMatch = !strcmp(reEnterPass, _tempPassword);
+
+
+	} while (!passMatch);
+
+
+
+	strcpy_s(password, _tempPassword);
 
 	return true;
+}
+
+bool User::setCNIC()
+{
+	std::cout << "CNIC :";
+
+	char _tempCNIC[20];
+
+	//std::cout << "Choose a Username :";
+	//std::cin.getline(_tempUsername, sizeof(_tempUsername));
+
+	return 1;
+
+
+
+
+
+
 }

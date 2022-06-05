@@ -15,6 +15,7 @@ protected:
 	bool setUserName();
 	bool UserNameIsAvailable(char* _string);
 	bool setPassword();
+	bool setCNIC();
 
 
 public:

@@ -284,8 +284,7 @@ bool Menu::PatientRegistration()
 
 		_tempPatient.setPassword();
 
-		cout << "Password :";	
-		cin.getline(_tempPatient.password, sizeof(_tempPatient.password));
+		
 	
 
 		//cout << "Confirm password :";
@@ -407,8 +406,7 @@ bool Menu::DoctorRegistration()
 	_tempDoctor.setPassword();
 	
 
-	cout << "Password :";
-	cin.getline(_tempDoctor.password, sizeof(_tempDoctor.password));
+	
 	
 
 	//cout << "Confirm password :";
