@@ -1,6 +1,7 @@
 #include "Menu.h"
 #include <iostream>
 #include <fstream>
+
 #include "Patient.h"
 
 
@@ -19,8 +20,10 @@ void Menu::displayMainMenu()
 	cout << "1. Login " << endl;
 	cout << "2. Register " << endl;
 	cout << "::> ";
-	int choice;
+	int choice;	
 	cin >> choice;
+	
+	
 
 	switch (choice)
 	{
@@ -32,7 +35,7 @@ void Menu::displayMainMenu()
 		break;
 	default:
 		cout << "Invalid Choice Select Again" << endl;
-		displayMainMenu();
+	    displayMainMenu();
 		break;
 	}
 	
@@ -86,15 +89,14 @@ void Menu::displayRegisterMenu()
 		break;
 
 	case 2:
-		//DoctorRegistration();
+		DoctorRegistration();
 		break;
 	default:
 		cout << "Invalid Choice Select Again !!!" << endl;
 		displayRegisterMenu();
 		break;
 
-		break;
-	}
+			}
 
 
 }
@@ -107,11 +109,84 @@ bool Menu::PatientRegistration()
 	//system("cls");
 	cout << "\n\t================== PATIENT REGISTRATION PORTAL ==================\n " << endl;
 	
-	
 
+	
+	//Getting Patients Data
 		cout << "Full Name :";
+		
 		cin.ignore();
 		cin.getline(_tempPatient.name, sizeof(_tempPatient.name));
+		
+		cout << "Choose a Username :";
+		
+		cin.getline(_tempPatient.userName, sizeof(_tempPatient.userName));
+		cin.ignore();
+
+		cout << "Password :";
+	
+		cin.getline(_tempPatient.password, sizeof(_tempPatient.password));
+		cin.ignore();
+
+		//cout << "Confirm password :";
+		//cin.ignore();
+		//cin.getline(_tempPatient.name, sizeof(_tempPatient.name));
+
+		cout << "CNIC :";
+		
+		cin.getline(_tempPatient.CNIC, sizeof(_tempPatient.CNIC));
+		cin.ignore();
+
+
+		cout << "Date Of Birth [ddmmyyyy] :";
+		cin.getline(_tempPatient.dateOfBirth, sizeof(_tempPatient.dateOfBirth));
+		cin.ignore();
+
+		cout << "Gender [ M /F / O(for Others) ] :";
+		cin.getline(_tempPatient.gender, sizeof(_tempPatient.gender));
+		cin.ignore();
+
+		cout << "Address :";
+		cin.getline(_tempPatient.address, sizeof(_tempPatient.address));
+		cin.ignore();
+
+		cout << "Mobile No";
+		cin.getline(_tempPatient.mobileNo, sizeof(_tempPatient.mobileNo));
+		cin.ignore();
+
+		cout << "Email :";
+		cin.getline(_tempPatient.email, sizeof(_tempPatient.email));
+		cin.ignore();
+
+		cout << "\n====================== Medical Data ===================\n" << endl;
+		cout << "Leave Blank If Not Available :\n";
+		cin.ignore();
+
+		cout << "Blood Group :";
+		cin.getline(_tempPatient.bloodGroup, sizeof(_tempPatient.bloodGroup));
+		cin.ignore();
+
+
+		cout << "Martial Status [ M(arried) / U(nmarried) / D(ivorced) / W(idowed) ] :";
+		cin.getline(_tempPatient.martialStatus, sizeof(_tempPatient.martialStatus));
+		cin.ignore();
+
+
+		cout << "Allergies (if any) [Seperate with commas(,) ] :";
+		cin.getline(_tempPatient.allergies, sizeof(_tempPatient.allergies));
+		cin.ignore();
+
+		cout << "Perscriptions (if any) [Seperate with commas(,) ] :";
+		cin.getline(_tempPatient.prescriptions, sizeof(_tempPatient.prescriptions));
+		cin.ignore();
+
+		cout << "Diseases (if any) [Seperate with commas(,) ] :";
+		cin.getline(_tempPatient.diseases, sizeof(_tempPatient.diseases));
+		cin.ignore();
+
+		
+
+
+
 
 	
 

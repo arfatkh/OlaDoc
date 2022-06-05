@@ -58,7 +58,7 @@ int main()
     while (fin.read((char*)&P, sizeof(P)))
     {
         
-        cout<<x++<<" " << P.getName() <<", " << P.getID() << endl;
+        cout<<x++<<" " << P.getName() <<", " << P.getID() << P.getAddress() << endl;
         
       
     }
@@ -77,7 +77,7 @@ int main()
 
 
 
-
+    system("pause");
 
 
 
