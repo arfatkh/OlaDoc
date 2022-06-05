@@ -12,5 +12,11 @@ public:
 	bool PatientRegistration(); // Specific for patient's Registration.
 	bool DoctorRegistration(); //Specific for Doctors's Registration.
 
+
+	void ClearScreen();
+
+	//Input validation Fucntions
+	int getIntChoice(const char* textToAdd="Select An option :");
+
 };
 

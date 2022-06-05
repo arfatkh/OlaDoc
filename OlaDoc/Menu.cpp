@@ -1,5 +1,7 @@
 #include "Menu.h"
 #include <iostream>
+#include <iomanip>
+
 #include <fstream>
 
 #include"OlaDoc.h"
@@ -13,6 +15,7 @@ using std::endl;
 using std::cin;
 using std::ifstream;
 using std::ofstream;
+
 
 
 
@@ -69,29 +72,45 @@ void viewDoctors()
 
 void Menu::displayMainMenu()
 {
-	cout << "Welcome to OlaDoc" << endl;
-	cout << "1. Login " << endl;
-	cout << "2. Register " << endl;
-	cout << "::> ";
-	int choice;	
-	cin >> choice;
-	
-	
+	cout << " =================== Welcome to OlaDoc ====================" << endl;
+	cout << "[1] Login " << endl;
+	cout << "[2] Register " << endl;
+	cout << "[0] Quit " << endl;
 
-	switch (choice)
-	{
-	case 1:
-		displayLoginMenu();
-		break;
-	case 2:
-		displayRegisterMenu();
-		break;
-	default:
-		cout << "Invalid Choice Select Again" << endl;
-	    displayMainMenu();
-		break;
-	}
+	cout << "====================================\n";
+	int choice = -1;
+
+		choice = getIntChoice();	
 	
+		while (choice > 0)		{
+
+
+
+			switch (choice)
+			{
+			case 1:
+				displayLoginMenu();
+				break;
+			case 2:
+				displayRegisterMenu();
+				break;
+			case 0:
+				cout << "Quitting ...\n";
+				break;
+			default:							
+				cout << "Invalid Choice Select Again!!!" << endl;
+				break;
+			}
+
+			
+			cout << " =================== Welcome to OlaDoc ====================" << endl;
+			cout << "[1] Login " << endl;
+			cout << "[2] Register " << endl;
+			cout << "[0] Quit " << endl;
+
+			choice = getIntChoice();
+
+		}
 
 
 
@@ -110,24 +129,48 @@ void Menu::displayAdminMenu()
 	cout << "[7] Edit Appoitments \n";
 
 	cout<<"====================================\n";
-	cout << "Choose an Option :";
-	int choice;
-	cin >> choice;
-	cin.ignore();
-
-	switch (choice)
-	{
-	case 1:
-	{
-
-		viewDoctors();
-		break;
-
-	}
-	default:
-		break;
-	}
 	
+	int choice = -1;
+
+	choice = getIntChoice();
+
+	while (choice > 0) {
+
+
+
+		switch (choice)
+		{
+		case 1:
+			viewDoctors();
+			break;
+			break;		
+		case 0:
+			cout << "Quitting ...\n";
+			exit(0);
+			break;
+		default:
+			ClearScreen();
+			cout << "Invalid Choice Select Again!!!" << endl;
+
+			break;
+		}
+
+		cout << "==================== Oladoc Admin Menu ==================" << endl;
+		cout << "[1] Add Doctor \n";
+		cout << "[2] View Doctor \n";
+		cout << "[3] Delete Doctor \n";
+		cout << "[4] Edit Doctor's Data/Schedule\n";
+		cout << "[5] View Patient \n";
+		cout << "[6] View Appoitments \n";
+		cout << "[7] Edit Appoitments \n";
+
+		cout << "====================================\n";	
+
+		choice = getIntChoice();
+
+	}
+
+
 
 
 
@@ -163,33 +206,79 @@ void Menu::displayLoginMenu()
 }
 void Menu::displayRegisterMenu()
 {
-	int choice;
+	//To clear the screen
+	ClearScreen();
+
+	
 	cout << "\n================ Registration Menu =================\n" << endl;
-	cout << "1- Register as Patient." << endl;
-	cout << "2- Register as Doctor" << endl;
-	cout << "Select an Option ::> ";
-	cin >> choice;
-	cin.ignore();
+	cout << "[1] Register as Patient." << endl;
+	cout << "[2] Register as Doctor" << endl;
+	cout << "[0] Quit" << endl;
+
+	cout << "====================================\n";
+
+	int choice = -1;
+
+	choice = getIntChoice();
+
+	while (choice > 0) {
 
 
-	switch (choice)
-	{
-	case 1:
-		PatientRegistration();
-		break;
 
-	case 2:
-		DoctorRegistration();
-		break;
-	default:
-	{
-		cout << "Invalid Choice Select Again !!!" << endl;
-		displayRegisterMenu();
-		break;
+		switch (choice)
+		{
+		case 1:
+			PatientRegistration();
+			break;
+
+		case 2:
+			DoctorRegistration();
+			break;
+		case 0:
+			cout << "Quitting ...\n";
+			exit(0);
+			break;
+		default:
+			ClearScreen();
+			cout << "Invalid Choice Select Again!!!\n\n" << endl;
+			break;
+		}
+
+		cout << "\n================ Registration Menu =================\n" << endl;
+		cout << "[1] Register as Patient." << endl;
+		cout << "[2] Register as Doctor" << endl;
+		cout << "[0] Quit" << endl;
+		cout << "====================================\n";
+
+		choice = getIntChoice();
+
 	}
 
-	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 
 }
 
@@ -198,7 +287,7 @@ bool Menu::PatientRegistration()
 	char PATIENT_FILE_NAME[20] = "patients.dat";
 
 	Patient _tempPatient;
-	//system("cls");
+	ClearScreen();
 	cout << "\n\t================== PATIENT REGISTRATION PORTAL ==================\n " << endl;
 	
 
@@ -335,7 +424,7 @@ bool Menu::DoctorRegistration()
 
 	Doctor _tempDoctor;
 	//To clear the screen
-	system("cls");
+	ClearScreen();
 	cout << "\n\t================== DOCTOR REGISTRATION PORTAL ==================\n " << endl;
 
 
@@ -478,3 +567,44 @@ bool Menu::DoctorRegistration()
 
 
 }
+
+
+
+
+//Input Validation Fucntions
+int Menu::getIntChoice(const char* textToAdd)
+{
+
+	int choice = 0;
+
+	cout << textToAdd;
+	cin >>std::setw(1) >> choice;
+
+	while (!cin.good())
+	{
+		//Displaying Error
+		cout << "Faulty  Input ! Try Again.\n";
+
+
+		//Clearing Stream
+		cin.clear();
+		cin.ignore(INT_MAX,'\n');
+
+		//Taking Input Again;
+		cout << textToAdd;
+		cin >> choice;
+
+	}
+
+	//Clearing Stream
+	cin.clear();
+	cin.ignore(INT_MAX, '\n');
+	
+
+
+
+	return choice;
+
+}
+
+void Menu::ClearScreen() { system("cls"); }
