@@ -12,6 +12,10 @@ protected:
 	char gender[10];
 	virtual void generateID()=0;//To generate random ids for users
 	virtual bool IDisAvailable(char* ID)=0; //Checks if an ID is available
+	bool setUserName();
+	bool UserNameIsAvailable(char* _string);
+	bool setPassword();
+
 
 public:
 	

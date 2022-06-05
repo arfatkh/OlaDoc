@@ -41,7 +41,7 @@ bool Patient::IDisAvailable(char *ID)
 		while (fin.read((char*)&P, sizeof(P)))
 		{
 
-			if (strcmp(P.getID(), ID))
+			if (!strcmp(P.getID(), ID))
 				return false;
 
 
@@ -52,3 +52,5 @@ bool Patient::IDisAvailable(char *ID)
 		return true;
 
 }
+
+

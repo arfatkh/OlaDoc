@@ -18,6 +18,9 @@ class Patient :
         double balance;
        virtual void  generateID();
        virtual  bool IDisAvailable(char* ID);
+     
+
+
 public:
     Patient()
     {

@@ -72,17 +72,20 @@ void viewDoctors()
 
 void Menu::displayMainMenu()
 {
+	
+
 	cout << " =================== Welcome to OlaDoc ====================" << endl;
 	cout << "[1] Login " << endl;
 	cout << "[2] Register " << endl;
 	cout << "[0] Quit " << endl;
 
 	cout << "====================================\n";
+	
 	int choice = -1;
 
 		choice = getIntChoice();	
 	
-		while (choice > 0)		{
+		while (choice >= 0)		{
 
 
 
@@ -96,6 +99,7 @@ void Menu::displayMainMenu()
 				break;
 			case 0:
 				cout << "Quitting ...\n";
+				exit(0);
 				break;
 			default:							
 				cout << "Invalid Choice Select Again!!!" << endl;
@@ -103,6 +107,7 @@ void Menu::displayMainMenu()
 			}
 
 			
+			ClearScreen();
 			cout << " =================== Welcome to OlaDoc ====================" << endl;
 			cout << "[1] Login " << endl;
 			cout << "[2] Register " << endl;
@@ -213,7 +218,7 @@ void Menu::displayRegisterMenu()
 	cout << "\n================ Registration Menu =================\n" << endl;
 	cout << "[1] Register as Patient." << endl;
 	cout << "[2] Register as Doctor" << endl;
-	cout << "[0] Quit" << endl;
+	cout << "[0] Back to MainMenu" << endl;
 
 	cout << "====================================\n";
 
@@ -221,7 +226,7 @@ void Menu::displayRegisterMenu()
 
 	choice = getIntChoice();
 
-	while (choice > 0) {
+	while (choice >= 0) {
 
 
 
@@ -235,15 +240,16 @@ void Menu::displayRegisterMenu()
 			DoctorRegistration();
 			break;
 		case 0:
-			cout << "Quitting ...\n";
-			exit(0);
+			ClearScreen();
+			displayMainMenu();
+			
 			break;
 		default:
 			ClearScreen();
 			cout << "Invalid Choice Select Again!!!\n\n" << endl;
 			break;
 		}
-
+		ClearScreen();
 		cout << "\n================ Registration Menu =================\n" << endl;
 		cout << "[1] Register as Patient." << endl;
 		cout << "[2] Register as Doctor" << endl;
@@ -254,31 +260,7 @@ void Menu::displayRegisterMenu()
 
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
+		
 
 }
 
@@ -294,20 +276,17 @@ bool Menu::PatientRegistration()
 	
 	//Getting Patients Data
 		cout << "Full Name :";
-		
-		
 		cin.getline(_tempPatient.name, sizeof(_tempPatient.name));
-		cin.ignore();
+		
 	
 		
-		cout << "Choose a Username :";		
-		cin.getline(_tempPatient.userName, sizeof(_tempPatient.userName));
-		cin.ignore();
+		_tempPatient.setUserName();
 
-		cout << "Password :";
-	
+		_tempPatient.setPassword();
+
+		cout << "Password :";	
 		cin.getline(_tempPatient.password, sizeof(_tempPatient.password));
-		cin.ignore();
+	
 
 		//cout << "Confirm password :";
 		//cin.ignore();
@@ -316,28 +295,22 @@ bool Menu::PatientRegistration()
 		cout << "CNIC :";
 		
 		cin.getline(_tempPatient.CNIC, sizeof(_tempPatient.CNIC));
-		cin.ignore();
 
 
 		cout << "Date Of Birth [ddmmyyyy] :";
 		cin.getline(_tempPatient.dateOfBirth, sizeof(_tempPatient.dateOfBirth));
-		cin.ignore();
 
 		cout << "Gender [ M /F / O(for Others) ] :";
 		cin.getline(_tempPatient.gender, sizeof(_tempPatient.gender));
-		cin.ignore();
 
 		cout << "Address :";
 		cin.getline(_tempPatient.address, sizeof(_tempPatient.address));
-		cin.ignore();
 
 		cout << "Mobile No";
 		cin.getline(_tempPatient.mobileNo, sizeof(_tempPatient.mobileNo));
-		cin.ignore();
 
 		cout << "Email :";
 		cin.getline(_tempPatient.email, sizeof(_tempPatient.email));
-		cin.ignore();
 
 		cout << "\n====================== Medical Data ===================\n" << endl;
 		cout << "Leave Blank If Not Available :\n";
@@ -345,25 +318,20 @@ bool Menu::PatientRegistration()
 
 		cout << "Blood Group :";
 		cin.getline(_tempPatient.bloodGroup, sizeof(_tempPatient.bloodGroup));
-		cin.ignore();
 
 
 		cout << "Martial Status [ M(arried) / U(nmarried) / D(ivorced) / W(idowed) ] :";
 		cin.getline(_tempPatient.martialStatus, sizeof(_tempPatient.martialStatus));
-		cin.ignore();
 
 
 		cout << "Allergies (if any) [Seperate with commas(,) ] :";
 		cin.getline(_tempPatient.allergies, sizeof(_tempPatient.allergies));
-		cin.ignore();
 
 		cout << "Perscriptions (if any) [Seperate with commas(,) ] :";
 		cin.getline(_tempPatient.prescriptions, sizeof(_tempPatient.prescriptions));
-		cin.ignore();
 
 		cout << "Diseases (if any) [Seperate with commas(,) ] :";
 		cin.getline(_tempPatient.diseases, sizeof(_tempPatient.diseases));
-		cin.ignore();
 
 		
 
@@ -429,17 +397,18 @@ bool Menu::DoctorRegistration()
 
 
 	//Getting Doctors Data
+	//cin.ignore(INT_MAX, '\n');
 	cout << "Full Name :";
 	cin.getline(_tempDoctor.name, sizeof(_tempDoctor.name));
-	cin.ignore();
+	
 
-	cout << "Choose a Username :";
-	cin.getline(_tempDoctor.userName, sizeof(_tempDoctor.userName));
-	cin.ignore();
+	_tempDoctor.setUserName();
+	
+	
 
 	cout << "Password :";
 	cin.getline(_tempDoctor.password, sizeof(_tempDoctor.password));
-	cin.ignore();
+	
 
 	//cout << "Confirm password :";
 	//cin.ignore();
@@ -448,34 +417,33 @@ bool Menu::DoctorRegistration()
 	cout << "CNIC :";
 
 	cin.getline(_tempDoctor.CNIC, sizeof(_tempDoctor.CNIC));
-	cin.ignore();
+
 
 
 	cout << "Gender [ M /F / O(for Others) ] :";
 	cin.getline(_tempDoctor.gender, sizeof(_tempDoctor.gender));
-	cin.ignore();
 
 
-	cout << "Mobile No";
+	
+	cout << "Mobile No :";
 	cin.getline(_tempDoctor.mobileNo, sizeof(_tempDoctor.mobileNo));
-	cin.ignore();
 
+	
 	cout << "Email :";
+
 	cin.getline(_tempDoctor.email, sizeof(_tempDoctor.email));
-	cin.ignore();
 
 	cout << "\n====================== Professional Data ===================\n" << endl;
 	cout << "Leave Blank If Not Available :\n";
-	cin.ignore();
 
-	cin.ignore(1000, '\n');
 	cout << "Hourly Charge :";
+	
 	cin >> _tempDoctor.hourlyCharge;
 	
 
 	cout << "Academic Degree :";
+	cin.ignore(INT_MAX, '\n');
 	cin.getline(_tempDoctor.academicDegree, sizeof(_tempDoctor.academicDegree));
-	cin.ignore();
 
 
 
@@ -522,49 +490,6 @@ bool Menu::DoctorRegistration()
 
 	//Closing the Doctor Data File
 	fout.close();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 

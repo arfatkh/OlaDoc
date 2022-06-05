@@ -41,14 +41,14 @@ bool Doctor::IDisAvailable(char* ID)
 {
 
 
-	Doctor P;
+	Doctor D;
 	std::ifstream fin;
 	fin.open("doctors.dat", std::ios::in | std::ios::binary);
 
-	while (fin.read((char*)&P, sizeof(P)))
+	while (fin.read((char*)&D, sizeof(D)))
 	{
 
-		if (strcmp(P.getID(), ID))
+		if (!strcmp(D.getID(), ID))
 			return false;
 
 
@@ -59,3 +59,4 @@ bool Doctor::IDisAvailable(char* ID)
 	return true;
 
 }
+
