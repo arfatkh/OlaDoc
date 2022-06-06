@@ -112,7 +112,7 @@ bool User::setUserName()
 bool User::UserNameIsAvailable(char* _string)
 {
 
-
+	
 	//Check in doctors Data
 	Doctor D;
 	std::ifstream fin;
@@ -122,11 +122,15 @@ bool User::UserNameIsAvailable(char* _string)
 	{
 
 		if (!strcmp(D.getUserName(), _string))
+		{
+			fin.close();
 			return false;
+		}
+			
 
 	}
 
-	fin.close();
+	
 
 
 
@@ -140,13 +144,16 @@ bool User::UserNameIsAvailable(char* _string)
 	{
 
 		if (!strcmp(P.getUserName(), _string))
+		{
+			fin.close();
 			return false;
+		}
 
 
 
 	}
 
-	fin1.close();
+	
 
 
 
@@ -382,10 +389,13 @@ bool User::CNICAvailable(char* _cnic)
 	{
 
 		if (!strcmp(D.getCNIC(), _cnic))
+		{
+			fin.close();
 			return false;
+		}
 	}
 
-	fin.close();
+	
 
 
 
@@ -398,13 +408,16 @@ bool User::CNICAvailable(char* _cnic)
 	{
 
 		if (!strcmp(P.getCNIC(), _cnic))
+		{
+			fin.close();
 			return false;
+		}
 
 
 
 	}
 
-	fin.close();
+	
 
 
 

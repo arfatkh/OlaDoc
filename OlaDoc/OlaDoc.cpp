@@ -32,6 +32,7 @@ Section : BSCS Z
 
 void OlaDoc::startProgram()
 {
+   // system("color e8");
 	MenuMain.displayMainMenu();
 	//MenuMain.displayDoctorMenu();
 

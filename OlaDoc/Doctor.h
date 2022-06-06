@@ -9,7 +9,7 @@ class Doctor :
     public User
 {
     const char* DOCTOR_FILE_NAME = "doctors.dat";
-    char DoctorID[20] = "";
+    char DoctorID[10] = "";
     char academicDegree[50] = "";
     double hourlyCharge=0;
     char specialization[50] = "";
