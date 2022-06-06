@@ -13,6 +13,7 @@ class DateTime
 public:
 
 	DateTime(std::string str);
+	void setDate(std::string str);
 
 	void setTime(int _hour, int _min, int _sec){
 		hour = _hour;
