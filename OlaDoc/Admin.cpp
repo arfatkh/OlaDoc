@@ -30,20 +30,22 @@ void Admin::viewDoctors()
 
     ifstream fin;
     fin.open(PATIENT_FILE_NAME, std::ios::in | std::ios::binary);
-   
-    int x = 0;
-    while (fin.read((char*)&D, sizeof(D)))
+    if (fin.is_open())
     {
-        cout << "========================================================================\n";
-        cout << " Name :" << D.getName() << "\n ID:" << D.getID()<<endl;
-        cout << "========================================================================\n";
+
+        int x = 0;
+        while (fin.read((char*)&D, sizeof(D)))
+        {
+            cout << "========================================================================\n";
+            cout << " Name :" << D.getName() << "\n ID:" << D.getID() << endl;
+            cout << "========================================================================\n";
+
+        }
+
+
+        fin.close();
 
     }
-
-
-    fin.close();
-
-
 
 
 

@@ -55,16 +55,18 @@ int main()
 
     ifstream fin;
     fin.open("patients.dat", ios::in | ios::binary);
-    int x = 0;
-    while (fin.read((char*)&P, sizeof(P)))
+    if (fin.is_open())
     {
-        
-        cout<<x++<<" " << P.getName() <<", " << P.getID() << P.getAddress() << endl;
-        
-      
+        int x = 0;
+        while (fin.read((char*)&P, sizeof(P)))
+        {
+
+            cout << x++ << " " << P.getName() << ", " << P.getID() << P.getAddress() << endl;
+
+
+        }
+
     }
-
-
     fin.close();
 
 

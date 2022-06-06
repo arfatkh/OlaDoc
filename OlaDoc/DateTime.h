@@ -12,6 +12,7 @@ class DateTime
 
 public:
 
+	DateTime() {};
 	DateTime(std::string str);
 	void setDate(std::string str);
 

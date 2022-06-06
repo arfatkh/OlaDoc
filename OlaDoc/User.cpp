@@ -118,19 +118,21 @@ bool User::UserNameIsAvailable(char* _string)
 	std::ifstream fin;
 	fin.open("doctors.dat", std::ios::in | std::ios::binary);
 
-	while (fin.read((char*)&D, sizeof(D)))
+	if (fin.is_open())
 	{
-
-		if (!strcmp(D.getUserName(), _string))
+		while (fin.read((char*)&D, sizeof(D)))
 		{
-			fin.close();
-			return false;
+
+			if (!strcmp(D.getUserName(), _string))
+			{
+				fin.close();
+				return false;
+			}
+
+
 		}
-			
 
 	}
-
-	
 
 
 
@@ -385,17 +387,19 @@ bool User::CNICAvailable(char* _cnic)
 	std::ifstream fin;
 	fin.open(DOCTOR_FILE_NAME, std::ios::in | std::ios::binary);
 
-	while (fin.read((char*)&D, sizeof(D)))
+	if (fin.is_open())
 	{
-
-		if (!strcmp(D.getCNIC(), _cnic))
+		while (fin.read((char*)&D, sizeof(D)))
 		{
-			fin.close();
-			return false;
-		}
-	}
 
-	
+			if (!strcmp(D.getCNIC(), _cnic))
+			{
+				fin.close();
+				return false;
+			}
+		}
+
+	}
 
 
 
@@ -403,18 +407,20 @@ bool User::CNICAvailable(char* _cnic)
 	Patient P;
 
 	fin.open(PATIENT_FILE_NAME, std::ios::in | std::ios::binary);
-
-	while (fin.read((char*)&P, sizeof(P)))
+	if (fin.is_open())
 	{
-
-		if (!strcmp(P.getCNIC(), _cnic))
+		while (fin.read((char*)&P, sizeof(P)))
 		{
-			fin.close();
-			return false;
+
+			if (!strcmp(P.getCNIC(), _cnic))
+			{
+				fin.close();
+				return false;
+			}
+
+
+
 		}
-
-
-
 	}
 
 	
