@@ -1,7 +1,7 @@
 #pragma once
 class Feedback
 {
-	double Ratingof10 = -1;
+	double Ratingof5 = -1;
 	char review[150]="";
 	char response[150]="";
 

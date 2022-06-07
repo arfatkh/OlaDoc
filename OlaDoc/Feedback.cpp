@@ -5,7 +5,7 @@ using std::cin;
 using std::cout;
 
 
-double Feedback::getRating() { return Ratingof10; }
+double Feedback::getRating() { return Ratingof5; }
 char* Feedback::getReview() { return review; }
 char* Feedback::getResponse() { return response; }
 
@@ -16,12 +16,12 @@ void Feedback::setRating()
 
 	do {
 		
-		cout << "Enter Rating out of 10 :";
+		cout << "Enter Rating out of 5 :";
 		cin >> _r;
 		cin.ignore(1000, '\n');
-	} while (_r > 10 || _r < 0);
+	} while (_r > 5 || _r < 0);
 	
-	Ratingof10 = _r;
+	Ratingof5 = _r;
 }
 void Feedback::setReview()
 {

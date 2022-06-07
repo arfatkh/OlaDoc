@@ -16,6 +16,8 @@ class Doctor :
     char specialization[50] = "";
     char city[20];
     double balance = 0;
+
+    double rating = calcRating();
    
     virtual  bool IDisAvailable(char* ID);
   
@@ -24,11 +26,15 @@ class Doctor :
 
 
 public:
+    double calcRating();
     virtual void  generateID();
     void viewMyAppointment();
     void cancleAppointments();
     void respondToFeedback();
     void viewMydata();
+    void completeAppointment();
+
+
     Doctor();
     friend bool Menu::DoctorRegistration();
     char* getID() { return DoctorID; };

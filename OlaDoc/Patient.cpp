@@ -309,7 +309,7 @@ char* Patient::ListAllDocs()
 		while (fin.read((char*)&D, sizeof(D)))
 		{	
 			cout << "\n\n================= Doctor [" << count << "] ======================\n\n " << endl;
-			cout <<count << ". Name :" << D.getName() << "\n ID:" << D.getID() << "Cnic: " << D.getCNIC() << endl;
+			cout <<count << ". Name :" << D.getName() << "\n Rating" << D.calcRating() << "Cnic: " << D.getCNIC() << endl;
 			//cout << "\n========================================================================\n";
 			count++;
 		}
@@ -743,7 +743,7 @@ void Patient::giveFeedback()
 		while (fin.read((char*)&A, sizeof(A)))
 		{
 
-			if (!strcmp(A.patientID, patientID) )//&& !strcmp(A.status, "CC")) //&& strcmp(A.status,"C"))
+			if (!strcmp(A.patientID, patientID) && !strcmp(A.status, "CC")) //&& strcmp(A.status,"C"))
 			{
 				
 				cout << "NO " << count << endl;

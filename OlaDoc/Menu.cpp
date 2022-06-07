@@ -200,7 +200,7 @@ void Menu::displayPatientMenu(char* PatientID)
 			{
 				
 				CurrentPatientObj = &P;
-				
+				break;
 			}
 
 
@@ -308,6 +308,7 @@ void Menu::displayDoctorMenu(char* DoctorID)
 			{
 
 				CurrentDoctorObj = &D;
+				break;
 
 			}
 
@@ -323,7 +324,7 @@ void Menu::displayDoctorMenu(char* DoctorID)
 
 	cout << "[1] View My Appointment \n";
 	cout << "[2] Cancle Appointment \n";
-	cout << "[3] Edit Appointment \n";
+	cout << "[3] Complete Appointment \n";
 	cout << "[4] View My Data\n";
 	cout << "[5] Edit My Data \n";
 	cout << "[6] Give/Edit Feedback Responses \n";
@@ -352,6 +353,7 @@ void Menu::displayDoctorMenu(char* DoctorID)
 			CurrentDoctorObj->viewMydata();
 			break;
 		case 3:
+			CurrentDoctorObj->completeAppointment();
 		
 			break;
 		case 6:
@@ -376,7 +378,7 @@ void Menu::displayDoctorMenu(char* DoctorID)
 		cout << "Welcome!,  " << CurrentDoctorObj->getName() << "\n";
 		cout << "[1] View My Appointment \n";
 		cout << "[2] Cancle Appointment \n";
-		cout << "[3] Edit Appointment \n";
+		cout << "[3] Complete Appointment \n";
 		cout << "[4] View My Data\n";
 		cout << "[5] Edit My Data \n";
 		cout << "[6] Give/Edit Feedback Responses \n";
@@ -402,23 +404,23 @@ void Menu::displayLoginMenu()
 	cout << "\n================ Login Menu =================\n" << endl;
 	char _tempUsername[20];
 	std::cout << "Enter  Username :";
-	strcpy_s(_tempUsername, "kani1");
 	
-	//std::cin.getline(_tempUsername, sizeof(_tempUsername));
-	//while (cin.fail())
-	//{
+	
+	std::cin.getline(_tempUsername, sizeof(_tempUsername));
+	while (cin.fail())
+	{
 
-	//	cin.ignore(1000,'\n');
-	//	cin.clear();
-	//	std::cout << "Yeh kaisa input hai bhaiii!! Dobara kro" << std::endl;
-	//	std::cout << "Enter  Username :";
-	//	cin.ignore(1000, '\n');
-	//	//strcpy_s(_tempUsername, "arfatkh");
-	//	std::cin.getline(_tempUsername, sizeof(_tempUsername));
-	//	
+		cin.ignore(1000,'\n');
+		cin.clear();
+		std::cout << "Yeh kaisa input hai bhaiii!! Dobara kro" << std::endl;
+		std::cout << "Enter  Username :";
+		cin.ignore(1000, '\n');
+	
+		std::cin.getline(_tempUsername, sizeof(_tempUsername));
+		
 
-	//}
-	//
+	}
+	
 
 
 
@@ -460,7 +462,7 @@ void Menu::displayLoginMenu()
 					{
 
 						cout << "Enter Password :";
-				/*		std::cin.getline(_tempPass, sizeof(_tempPass));
+						std::cin.getline(_tempPass, sizeof(_tempPass));
 
 						while (cin.fail())
 						{
@@ -473,8 +475,8 @@ void Menu::displayLoginMenu()
 							std::cin.getline(_tempPass, sizeof(_tempPass));
 
 
-						}*/
-						strcpy_s(_tempPass, "Arfat!!123");
+						}
+						//strcpy_s(_tempPass, "Arfat!!123");
 
 
 
@@ -482,7 +484,7 @@ void Menu::displayLoginMenu()
 						{
 							cout << "Incorrect Password!!\n";
 							cout << "Enter Password :";
-							//strcpy_s(_tempPass, "Arfat!!123");
+							
 
 
 
@@ -546,8 +548,9 @@ void Menu::displayLoginMenu()
 					{
 
 						cout << "Enter Password :";
-					//std::cin.getline(_tempPass, sizeof(_tempPass));
-						strcpy_s(_tempPass, "Kainat!!1");
+					   std::cin.getline(_tempPass, sizeof(_tempPass));
+						//strcpy_s(_tempPass, "Kainat!!1");
+
 						while (strcmp(D.getPassword(), _tempPass))
 						{
 							cout << "Incorrect Password!!\n";
@@ -827,8 +830,8 @@ bool Menu::DoctorRegistration()
 	cout << "Hourly Charge [In Person]:";
 	cin >> _tempDoctor.hourlyChargeInPerson;
 
-	cout << "Hourly Charge [Video Consultation]:";
-	cin >> _tempDoctor.hourlyChargeVideo;
+	//cout << "Hourly Charge [Video Consultation]:";
+	_tempDoctor.hourlyChargeVideo = _tempDoctor.hourlyChargeVideo - (0.3 * _tempDoctor.hourlyChargeInPerson);
 	
 
 	cout << "Academic Degree :";

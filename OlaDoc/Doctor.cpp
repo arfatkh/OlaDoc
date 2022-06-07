@@ -206,25 +206,32 @@ void Doctor::cancleAppointments()
 				while (fin.read((char*)&A, sizeof(A)))
 				{
 
-					if (!strcmp(A.DoctorID, DoctorID) && choice == x)
+					if (!strcmp(A.DoctorID, DoctorID))
 					{
-						if (!strcmp(A.status, "C"))
+						if (choice == x)
 						{
-							cout << "Already Cancelled !!";
-							fin.close();
-							break;
-						}
-						else
-						{
-							int current = fin.tellp();
-							fin.seekp(current - sizeof(A));
-							A.setStatus("C");
-							fin.write((char*)&A, sizeof(A));
-							fin.close();
-							cout << "Appointment Cancelled Successfully!\n";
-							break;
-						}
+							if (!strcmp(A.status, "C"))
+							{
+								cout << "Already Cancelled !!";
+								fin.close();
+								break;
+							}
+							else
+							{
+								int current = fin.tellp();
+								fin.seekp(current - sizeof(A));
+								A.setStatus("C");
+								fin.write((char*)&A, sizeof(A));
+								fin.close();
+								cout << "Appointment Cancelled Successfully!\n";
+								break;
+							}
 
+
+
+
+						}
+					
 						x++;
 
 					}
@@ -390,6 +397,8 @@ void Doctor::viewMydata()
 	cout << "Email :" << this->email << endl;
 	cout << "Hourly Charge in Person :" << this->hourlyChargeInPerson << endl;
 	cout << "Hourly Charge in Video :" << this->hourlyChargeVideo << endl;
+	cout << "Rating :" << (this)->rating << endl;
+
 	cout << "Balance :" << (this)->balance << endl;
 
 	cout << " =======  =======  =======  =======  =======  =======  =======  =======\n";
@@ -397,6 +406,192 @@ void Doctor::viewMydata()
 
 
 	system("pause");
+
+
+
+
+
+
+
+
+
+}
+
+double Doctor::calcRating()
+{
+
+	bool found = false;
+	int count = 0;
+
+	double sum = 0;
+	Appointment A;
+	std::fstream fin;
+	fin.open("appointments.dat", std::ios::in | std::ios::binary);
+	if (fin.is_open())
+	{
+		fin.seekg(std::ios::beg);
+		while (fin.read((char*)&A, sizeof(A)))
+		{
+
+			if (!strcmp(A.DoctorID, DoctorID))//&& !strcmp(A.status, "CC")) //&& strcmp(A.status,"C"))
+			{
+
+				sum += A.feedback.getRating();
+				count++;
+				found = true;
+				
+
+			}
+
+
+
+		}
+
+		fin.close();
+	}
+
+
+	if (found)
+	{
+
+		return sum / count;
+
+	}
+	else {
+		return 0;
+	}
+
+
+
+}
+
+void Doctor::completeAppointment()
+{
+	
+
+		bool found = false;
+		Appointment A;
+		std::fstream fin;
+		int count = 1;
+		system("cls");
+		fin.open("appointments.dat", std::ios::in | std::ios::binary);
+		fin.seekg(0);
+		cout << "====================Your Appointments=======================\n";
+		if (fin.is_open())
+		{
+			while (fin.read((char*)&A, sizeof(A)))
+			{
+
+				if (!strcmp(A.DoctorID, DoctorID)) //&& strcmp(A.status,"C"))
+				{
+					cout << "NO " << count++ << endl;
+					cout << "Appointment Status :" << A.status << endl;
+					cout << "Patient " << A.patientID << endl;
+					cout << "Rating " << A.feedback.getRating() << endl;
+					cout << "Review: " << A.feedback.getReview() << endl;
+					cout << "Response: " << A.feedback.getResponse() << endl;
+
+
+
+					cout << "================================================================\n";
+
+					found = true;
+
+				}
+
+
+
+			}
+
+			fin.close();
+
+
+
+
+
+			fin.open("appointments.dat", std::ios::in | std::ios::out | std::ios::ate | std::ios::binary);
+			fin.seekg(std::ios::beg);
+
+
+
+			if (found)
+			{
+				int choice;
+				cout << "Choose Appointment to complete [0 to go back]\n";
+				choice = getIntChoice();
+
+				while (choice > count)
+				{
+					cout << "Choose Appointment to complete [0 to go back]\n";
+
+					choice = getIntChoice();
+
+				}
+
+				if (choice != 0)
+				{
+					int x = 1;
+
+					while (fin.read((char*)&A, sizeof(A)))
+					{
+
+						if (!strcmp(A.DoctorID, DoctorID))// && choice == x)
+						{
+							if (x == choice)
+							{
+								if (!strcmp(A.status, "CC"))
+								{
+									cout << "Already Completed !!";
+									fin.close();
+									break;
+								}
+								else
+								{
+									int current = fin.tellp();
+									fin.seekp(current - sizeof(A));
+									A.setStatus("CC");
+									fin.write((char*)&A, sizeof(A));
+									fin.close();
+									cout << "Appointment Completed Successfully!\n";
+									break;
+								}
+
+							}
+						
+
+							x++;
+
+						}
+
+
+
+
+
+
+
+					}
+
+
+
+
+				}
+
+
+
+
+
+			}
+
+			if (!found)
+			{
+				cout << "                        No Appointments Found!                \n";
+			}
+
+
+
+			system("pause");
+
+		}
 
 
 
