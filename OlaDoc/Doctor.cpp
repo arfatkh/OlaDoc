@@ -1,10 +1,14 @@
 #include "Doctor.h"
+#include "Appointment.h"
 #include<iostream>
 #include<fstream>
 #include<ctime>
 #include<random>
 #include <string>
 
+using std::cin;
+using std::cout;
+using std::endl;
 
 
 Doctor::Doctor()
@@ -74,3 +78,307 @@ bool Doctor::IDisAvailable(char* ID)
 
 }
 
+void Doctor::viewMyAppointment()
+{
+
+	bool found = false;
+	Appointment A;
+	std::ifstream fin;
+	int count = 1;
+	fin.open("appointments.dat", std::ios::in | std::ios::binary);
+	system("cls");
+	cout << "====================Your Appointments=======================\n";
+	if (fin.is_open())
+	{
+		while (fin.read((char*)&A, sizeof(A)))
+		{
+
+			if (!strcmp(A.DoctorID, DoctorID)) //&& strcmp(A.status,"C"))
+			{
+				cout << "NO " << count++ << endl;
+				cout << "Appointment Status :" << A.status << endl;
+				cout << "Patient " << A.patientID << endl;
+				cout << "Rating " << A.feedback.getRating() << endl;
+				cout << "Review: " << A.feedback.getReview() << endl;
+				cout << "Response: " << A.feedback.getResponse() << endl;
+
+
+
+				cout << "================================================================\n";
+
+				found = true;
+
+			}
+
+
+
+		}
+
+		fin.close();
+	}
+
+	if (!found)
+	{
+		cout << "                        No Appointments Found!                \n";
+	}
+
+
+
+	system("pause");
+
+
+
+
+
+
+
+
+
+
+}
+
+
+void Doctor::cancleAppointments()
+{
+
+	bool found = false;
+	Appointment A;
+	std::fstream fin;
+	int count = 1;
+	system("cls");
+	fin.open("appointments.dat", std::ios::in  | std::ios::binary);
+	fin.seekg(0);
+	cout << "====================Your Appointments=======================\n";
+	if (fin.is_open())
+	{
+		while (fin.read((char*)&A, sizeof(A)))
+		{
+
+			if (!strcmp(A.DoctorID, DoctorID)) //&& strcmp(A.status,"C"))
+			{
+				cout << "NO " << count++ << endl;
+				cout << "Appointment Status :" << A.status << endl;
+				cout << "Patient " << A.patientID << endl;
+				cout << "Rating " << A.feedback.getRating() << endl;
+				cout << "Review: " << A.feedback.getReview() << endl;
+				cout << "Response: " << A.feedback.getResponse() << endl;
+
+
+
+				cout << "================================================================\n";
+
+				found = true;
+
+			}
+
+
+
+		}
+
+		fin.close();
+
+
+
+
+
+		fin.open("appointments.dat", std::ios::in | std::ios::out | std::ios::ate | std::ios::binary);
+		fin.seekg(std::ios::beg);
+
+
+
+		if (found)
+		{
+			int choice;
+			cout << "Choose Appointment to cancle [0 to go back]\n";
+			choice = getIntChoice();
+
+			while (choice > count)
+			{
+				cout << "Choose Appointment to cancle [0 to go back]\n";
+				choice = getIntChoice();
+
+			}
+
+			if (choice != 0)
+			{
+				int x = 1;
+
+				while (fin.read((char*)&A, sizeof(A)))
+				{
+
+					if (!strcmp(A.DoctorID, DoctorID) && choice == x)
+					{
+						if (!strcmp(A.status, "C"))
+						{
+							cout << "Already Cancelled !!";
+							fin.close();
+							break;
+						}
+						else
+						{
+							int current = fin.tellp();
+							fin.seekp(current - sizeof(A));
+							A.setStatus("C");
+							fin.write((char*)&A, sizeof(A));
+							fin.close();
+							cout << "Appointment Cancelled Successfully!\n";
+							break;
+						}
+
+						x++;
+
+					}
+
+
+
+
+
+
+
+				}
+
+
+
+
+			}
+
+
+
+
+
+		}
+
+		if (!found)
+		{
+			cout << "                        No Appointments Found!                \n";
+		}
+
+
+
+		system("pause");
+
+	}
+
+}
+
+void Doctor::respondToFeedback()
+{
+
+	bool found = false;
+	int count = 1;
+	Appointment A;
+	std::fstream fin;
+	fin.open("appointments.dat", std::ios::in | std::ios::binary);
+	system("cls");
+	cout << "====================Your Feeback Required on Appointments=======================\n";
+	if (fin.is_open())
+	{
+		fin.seekg(std::ios::beg);
+		while (fin.read((char*)&A, sizeof(A)))
+		{
+
+			if (!strcmp(A.DoctorID, DoctorID))//&& !strcmp(A.status, "CC")) //&& strcmp(A.status,"C"))
+			{
+
+				cout << "NO " << count << endl;
+				cout << "Doctor ID : " << A.DoctorID << endl;
+				cout << "Appointment Status :" << A.status << endl;
+				cout << "Patient " << A.patientID << endl;
+				cout << "Rating " << A.feedback.getRating() << endl;
+				cout << "Review: " << A.feedback.getReview() << endl;
+				cout << "Response: " << A.feedback.getResponse() << endl;
+				cout << "================================================================\n";
+				count++;
+				found = true;
+
+			}
+
+
+
+		}
+
+		fin.close();
+	}
+
+	if (!found)
+	{
+		cout << "                        No Appointments Found!                \n";
+	}
+
+
+
+	if (count > 1)
+	{
+
+		cout << "Select an Appointment to give feedback to \n";
+		cout << "Enter 0 to go back\n";
+		int choice = getIntChoice();
+
+		if (choice != 0)
+		{
+			while (choice > count)
+			{
+				cout << "Invalid Choice!!\n";
+				choice = getIntChoice();
+
+			}
+
+
+			fin.open("appointments.dat", std::ios::ate | std::ios::out | std::ios::in | std::ios::binary);
+			if (fin.is_open())
+			{
+
+				fin.seekg(std::ios::beg);
+				int i = 1;
+				while (fin.read((char*)&A, sizeof(A)))
+				{
+					if (!strcmp(A.DoctorID, DoctorID))
+					{
+						if (i == choice)
+						{
+							int current = fin.tellg();
+
+							fin.seekp(current - sizeof(A));
+
+							A.feedback.setResponse();
+						
+
+							fin.write((char*)&A, sizeof(A));
+							cout << "Feeback given Successfully!\n";
+							fin.close();
+
+							break;
+						}
+
+						i++;
+
+
+					}
+
+				}
+
+
+			}
+			else
+				cout << "Error Internal!!" << endl;
+		}
+
+
+	}
+
+
+
+
+
+	system("pause");
+
+
+
+
+
+
+
+
+
+
+}

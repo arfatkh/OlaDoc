@@ -219,6 +219,7 @@ void Menu::displayPatientMenu(char* PatientID)
 	cout << "[4] Edit Appointment \n";
 	cout << "[5] View My Data\n";
 	cout << "[6] Edit My Data \n";
+	cout << "[7] Give/Edit Feedbacks \n";
 	cout << "[0] Logout \n";
 
 
@@ -243,7 +244,9 @@ void Menu::displayPatientMenu(char* PatientID)
 		case 3:
 			CurrentPatientObj->cancleAppointment();
 			break;
-
+		case 7:
+			CurrentPatientObj->giveFeedback();
+			break;
 		case 0:
 			cout << "Quitting ...\n";
 			exit(0);
@@ -259,11 +262,14 @@ void Menu::displayPatientMenu(char* PatientID)
 		cout << "==================== Oladoc Patient Menu ==================" << endl;
 
 		cout << "[1] Search Doctors \n";
-		cout << "[2] View My Appointments \n";
+		cout << "[2] View My Appointment \n";
 		cout << "[3] Cancle Appointment \n";
-		cout << "[4] View My Data\n";
-		cout << "[5] Edit My Data \n";
+		cout << "[4] Edit Appointment \n";
+		cout << "[5] View My Data\n";
+		cout << "[6] Edit My Data \n";
+		cout << "[7] Give/Edit Feedbacks \n";
 		cout << "[0] Logout \n";
+
 
 
 
@@ -282,8 +288,102 @@ void Menu::displayPatientMenu(char* PatientID)
 
 void Menu::displayDoctorMenu(char* DoctorID)
 {
-	cout << "Oladoc Doctor Menu" << endl;
-	//cout<< D.getCNIC();
+	Doctor* CurrentDoctorObj = nullptr;
+
+	//Getting Patient Object
+
+	Doctor D;
+	std::ifstream fin;
+	fin.open("doctors.dat", std::ios::in | std::ios::binary);
+
+	if (fin.is_open())
+	{
+		while (fin.read((char*)&D, sizeof(D)))
+		{
+
+			if (!strcmp(D.getID(), DoctorID))
+			{
+
+				CurrentDoctorObj = &D;
+
+			}
+
+
+
+		}
+
+	}
+
+	ClearScreen();
+	cout << "==================== Oladoc Doctor Menu ==================" << endl;
+	cout << "Welcome!,  " << CurrentDoctorObj->getName() << "\n";
+
+	cout << "[1] View My Appointment \n";
+	cout << "[2] Cancle Appointment \n";
+	cout << "[3] Edit Appointment \n";
+	cout << "[4] View My Data\n";
+	cout << "[5] Edit My Data \n";
+	cout << "[6] Give/Edit Feedback Responses \n";
+	cout << "[0] Logout \n";
+
+
+	cout << "====================================\n";
+
+	int choice = -1;
+
+	choice = getIntChoice();
+
+	while (choice > 0) {
+
+
+
+		switch (choice)
+		{
+		case 1:
+			CurrentDoctorObj->viewMyAppointment();
+			break;
+		case 2:
+			CurrentDoctorObj->cancleAppointments();			
+			break;
+		case 3:
+		
+			break;
+		case 6:
+			CurrentDoctorObj->respondToFeedback();
+			break;
+		case 7:
+			
+			break;
+		case 0:
+			cout << "Quitting ...\n";
+			exit(0);
+			break;
+		default:
+			ClearScreen();
+			cout << "Invalid Choice Select Again!!!" << endl;
+
+			break;
+		}
+
+		ClearScreen();
+		cout << "==================== Oladoc Doctor Menu ==================" << endl;
+		cout << "Welcome!,  " << CurrentDoctorObj->getName() << "\n";
+		cout << "[1] View My Appointment \n";
+		cout << "[2] Cancle Appointment \n";
+		cout << "[3] Edit Appointment \n";
+		cout << "[4] View My Data\n";
+		cout << "[5] Edit My Data \n";
+		cout << "[6] Give/Edit Feedback Responses \n";
+		cout << "[0] Logout \n";
+		cout << "====================================\n";
+
+		choice = getIntChoice();
+
+	}
+
+
+	fin.close();
+	cout << "Logged Out Succesfully\n";
 
 
 }
@@ -296,7 +396,7 @@ void Menu::displayLoginMenu()
 	cout << "\n================ Login Menu =================\n" << endl;
 	char _tempUsername[20];
 	std::cout << "Enter  Username :";
-	strcpy_s(_tempUsername, "arfatkh");
+	strcpy_s(_tempUsername, "kani1");
 	
 	//std::cin.getline(_tempUsername, sizeof(_tempUsername));
 	//while (cin.fail())
@@ -440,8 +540,8 @@ void Menu::displayLoginMenu()
 					{
 
 						cout << "Enter Password :";
-						std::cin.getline(_tempPass, sizeof(_tempPass));
-
+					//std::cin.getline(_tempPass, sizeof(_tempPass));
+						strcpy_s(_tempPass, "Kainat!!1");
 						while (strcmp(D.getPassword(), _tempPass))
 						{
 							cout << "Incorrect Password!!\n";
@@ -451,10 +551,10 @@ void Menu::displayLoginMenu()
 
 
 
-
+						fin.close();
 						displayDoctorMenu(D.getID());
 
-						fin.close();
+						
 
 						//displayPatientMenu();
 
@@ -778,7 +878,6 @@ bool Menu::DoctorRegistration()
 
 
 }
-
 
 
 

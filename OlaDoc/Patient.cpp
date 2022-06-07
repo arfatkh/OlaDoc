@@ -105,7 +105,7 @@ void Patient::bookAppointment()
 			A.setType();
 			A.setPatient(patientID);
 			A.setDoctor(DocId);
-
+			
 
 
 			std::ofstream fout;
@@ -603,6 +603,12 @@ void Patient::viewMyAppointment()
 				cout << "Doctor ID : " << A.DoctorID << endl;
 				cout << "Appointment Status :" << A.status << endl;
 				cout << "Patient " << A.patientID << endl;
+				cout << "Rating " << A.feedback.getRating() << endl;
+				cout << "Review: " << A.feedback.getReview() << endl;
+				cout << "Response: " << A.feedback.getResponse() << endl;
+
+
+
 				cout << "================================================================\n";
 				
 				found = true;
@@ -639,8 +645,6 @@ void Patient::viewMyAppointment()
 void Patient::cancleAppointment()
 {
 	bool found = false;
-
-
 
 	viewMyAppointment();
 	
@@ -720,3 +724,123 @@ void Patient::cancleAppointment()
 
 
 }
+
+void Patient::giveFeedback()
+{
+
+	bool found = false;
+	int count=1;
+	Appointment A;
+	std::fstream fin;
+	fin.open("appointments.dat", std::ios::in | std::ios::binary);
+	system("cls");
+	cout << "====================Your Completed Appointment=======================\n";
+	if (fin.is_open())
+	{
+		fin.seekg(std::ios::beg);
+		while (fin.read((char*)&A, sizeof(A)))
+		{
+
+			if (!strcmp(A.patientID, patientID) )//&& !strcmp(A.status, "CC")) //&& strcmp(A.status,"C"))
+			{
+				
+				cout << "NO " << count << endl;
+				cout << "Doctor ID : " << A.DoctorID << endl;
+				cout << "Appointment Status :" << A.status << endl;
+				cout << "Patient " << A.patientID << endl;
+				cout << "Rating " << A.feedback.getRating() << endl;
+				cout << "Review: " << A.feedback.getReview() << endl;
+				cout << "Response: " << A.feedback.getResponse() << endl;
+				cout << "================================================================\n";
+				count++;
+				found = true;
+
+			}
+
+
+
+		}
+
+		fin.close();
+	}
+
+	if (!found)
+	{
+		cout << "                        No Appointments Found!                \n";
+	}
+
+	
+
+	if (count > 1)
+	{
+
+		cout << "Select an Appointment to give feedback to \n";
+		cout << "Enter 0 to go back\n";
+		int choice = getIntChoice();
+
+		if (choice != 0)
+		{
+			while (choice > count)
+			{
+				cout << "Invalid Choice!!\n";
+				choice = getIntChoice();
+
+			}
+
+
+			fin.open("appointments.dat", std::ios::ate | std::ios::out |  std::ios::in | std::ios::binary);
+			if (fin.is_open())
+			{
+
+				fin.seekg(std::ios::beg);
+				int i = 1;
+				while (fin.read((char*)&A, sizeof(A)))
+				{
+					if (!strcmp(A.patientID, patientID))
+					{
+						if (i == choice)
+						{
+							int current = fin.tellg();
+
+							fin.seekp(current - sizeof(A));
+
+							A.feedback.setRating();
+							A.feedback.setReview();
+
+							fin.write((char*)&A, sizeof(A));
+							cout << "Feeback given Successfully!\n";
+							fin.close();
+
+							break;
+						}
+
+						i++;
+
+
+					}
+
+				}
+
+
+			}
+			else
+				cout << "Error Internal!!" << endl;
+		}
+
+
+	}
+	
+
+
+
+
+	system("pause");
+
+
+
+
+
+}
+
+
+

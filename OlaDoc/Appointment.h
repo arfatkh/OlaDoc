@@ -1,6 +1,8 @@
 #pragma once
 #include "DateTime.h"
 #include "Patient.h"
+#include "Doctor.h"
+#include "Feedback.h"
 #include <ctime>
 #include<random>
 #include <fstream>
@@ -12,6 +14,9 @@ class Appointment
 	char DoctorID[20] = "";
 	char patientID[20] = "";
 	char AppType = 'I';//I - inperson | V=- video
+
+
+	Feedback feedback;
 
 
 	// P - Pending
@@ -26,10 +31,13 @@ class Appointment
 	void generateAppoitnmentID();
 	bool IDisAvailable(char* _string);
 	friend void Patient::bookAppointment();
+	friend void Doctor::viewMyAppointment();
+
 
 public:
 
 	friend class Patient;
+	friend class Doctor;
 	char* getID();
 	Appointment(){}
 

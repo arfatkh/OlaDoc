@@ -25,6 +25,9 @@ class Doctor :
 
 public:
     virtual void  generateID();
+    void viewMyAppointment();
+    void cancleAppointments();
+    void respondToFeedback();
     Doctor();
     friend bool Menu::DoctorRegistration();
     char* getID() { return DoctorID; };

@@ -131,6 +131,7 @@
     <ClInclude Include="Appointment.h" />
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="Doctor.h" />
+    <ClInclude Include="Feedback.h" />
     <ClInclude Include="Gynecologists.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="OlaDoc.h" />
@@ -142,6 +143,7 @@
     <ClCompile Include="Appointment.cpp" />
     <ClCompile Include="DateTime.cpp" />
     <ClCompile Include="Doctor.cpp" />
+    <ClCompile Include="Feedback.cpp" />
     <ClCompile Include="Gynecologists.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="OlaDoc.cpp" />

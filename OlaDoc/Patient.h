@@ -27,7 +27,9 @@ public:
     friend bool Menu::PatientRegistration();
     void bookAppointment();
     void cancleAppointment();
+    void giveFeedback();
 
+    void viewMydata();
 
     //Returns doctor's ID
     char* searchDoctor();
