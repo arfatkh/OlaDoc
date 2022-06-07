@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Patient.h"
-#include "Doctor.h"
+
 class Menu
 {
 public:
@@ -20,7 +19,7 @@ public:
 
 
 	void ClearScreen();
-
+	
 	//Input validation Fucntions
 	int getIntChoice(const char* textToAdd="Select An option :");
 
