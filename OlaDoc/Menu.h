@@ -6,8 +6,10 @@ class Menu
 public:
 	void displayMainMenu(); //The Main Menu with Login and Register options
 	void displayAdminMenu(); //Special Menu for Admin
-	void displayPatientMenu(); //Menu for Patient
-	void displayDoctorMenu(); //Menu for Doctors
+
+	void displayDoctorMenu(char* DoctorID); //Menu for Doctors
+	void displayPatientMenu(char* PatientID); //Menu for Patient
+
 	void displayLoginMenu(); //Login Menu to take userName and Password
 
 	void displayRegisterMenu(); //Menu for Registring new users

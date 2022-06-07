@@ -57,9 +57,6 @@ void viewDoctors()
 
 
 
-
-
-
 void Menu::displayMainMenu()
 {
 	
@@ -110,6 +107,9 @@ void Menu::displayMainMenu()
 
 
 }
+
+
+
 void Menu::displayAdminMenu()
 {
 	cout << "==================== Oladoc Admin Menu ==================" << endl;
@@ -174,15 +174,105 @@ void Menu::displayAdminMenu()
 
 
 }
-void Menu::displayPatientMenu()
+
+void Menu::displayPatientMenu(char* PatientID)
 {
+	Patient* CurrentPatientObj=nullptr;
+
+	//Getting Patient Object
+
+	Patient P;
+	std::ifstream fin;
+	fin.open("patients.dat", std::ios::in | std::ios::binary);
+
+	if (fin.is_open())
+	{
+		while (fin.read((char*)&P, sizeof(P)))
+		{
+
+			if (!strcmp(P.getID(), PatientID))
+			{
+				
+				CurrentPatientObj = &P;
+				
+			}
+
+
+
+		}
+
+	}
+	ClearScreen();
+	cout << "==================== Oladoc Patient Menu ==================" << endl;
+	cout << "Welcome!,  " <<  CurrentPatientObj->getName() << "\n";
+
+	cout << "[1] Add Doctor \n";
+	cout << "[2] View Doctor \n";
+	cout << "[3] Delete Doctor \n";
+	cout << "[4] Edit Doctor's Data/Schedule\n";
+	cout << "[5] View Patient \n";
+	cout << "[6] View Appoitments \n";
+	cout << "[7] Edit Appoitments \n";
+
+	cout << "====================================\n";
+
+	int choice = -1;
+
+	choice = getIntChoice();
+
+	while (choice > 0) {
+
+
+
+		switch (choice)
+		{
+		case 1:
+			viewDoctors();
+	
+			break;
+		case 0:
+			cout << "Quitting ...\n";
+			exit(0);
+			break;
+		default:
+			ClearScreen();
+			cout << "Invalid Choice Select Again!!!" << endl;
+
+			break;
+		}
+
+		cout << "==================== Oladoc Patient Menu ==================" << endl;
+		cout << "[1] Add Doctor \n";
+		cout << "[2] View Doctor \n";
+		cout << "[3] Delete Doctor \n";
+		cout << "[4] Edit Doctor's Data/Schedule\n";
+		cout << "[5] View Patient \n";
+		cout << "[6] View Appoitments \n";
+		cout << "[7] Edit Appoitments \n";
+
+		cout << "====================================\n";
+
+		choice = getIntChoice();
+
+	}
+
+
+
+
+
+
+
+
 	cout << "Oladoc Patient Menu" << endl;
+	cout << "paitent cncin" << CurrentPatientObj->getCNIC() << endl;
 
 
 
+
+	fin.close();
 }
 
-void Menu::displayDoctorMenu()
+void Menu::displayDoctorMenu(char* DoctorID)
 {
 	cout << "Oladoc Doctor Menu" << endl;
 	//cout<< D.getCNIC();
@@ -250,14 +340,13 @@ void Menu::displayLoginMenu()
 					}
 
 
-					cout << "loggined as " << P.getName() << endl;
 
-					//displayPatientMenu(P);
+					displayPatientMenu(P.getID());
 
 
 
 					fin.close();
-					//displayPatientMenu();
+					
 
 
 					break;
@@ -316,9 +405,9 @@ void Menu::displayLoginMenu()
 					}
 
 					
-					cout << "loggined as " << D.getName() << endl;
+					
 
-					//displayDoctorMenu(D);
+					displayDoctorMenu(D.getID());
 
 					fin.close();
 					
