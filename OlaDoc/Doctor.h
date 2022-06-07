@@ -28,6 +28,7 @@ public:
     void viewMyAppointment();
     void cancleAppointments();
     void respondToFeedback();
+    void viewMydata();
     Doctor();
     friend bool Menu::DoctorRegistration();
     char* getID() { return DoctorID; };

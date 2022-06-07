@@ -7,6 +7,8 @@
 #include<iostream>
 #include<fstream>
 #include<ctime>
+#include<iomanip>
+
 #include<random>
 #include <string.h>
 
@@ -844,3 +846,32 @@ void Patient::giveFeedback()
 
 
 
+void Patient::viewMydata()
+{
+	int x = 10;
+	system("cls");
+	cout << "========================= Information ==============================\n";
+	cout << "Name :" <<this->name << endl;
+	cout << "CNIC :" << this->CNIC << endl;
+	cout << "Address :" << this->address << endl;
+	cout << "Phone :" << this->mobileNo << endl;
+	cout << "ID  :" << this->patientID << endl;
+	cout << "Date Of Birth :" << this->name << endl;
+	cout << "Prescriptions :" << this->prescriptions << endl;
+	cout << "Allergies :" << this->allergies << endl;
+	cout << "Balance :" << (this)->balance << endl;
+	cout << " =======  =======  =======  =======  =======  =======  =======  =======\n";
+
+
+
+	system("pause");
+
+
+
+
+
+
+
+
+
+}

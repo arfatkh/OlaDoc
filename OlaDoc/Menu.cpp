@@ -244,6 +244,9 @@ void Menu::displayPatientMenu(char* PatientID)
 		case 3:
 			CurrentPatientObj->cancleAppointment();
 			break;
+		case 6:
+			CurrentPatientObj->viewMydata();
+			break;
 		case 7:
 			CurrentPatientObj->giveFeedback();
 			break;
@@ -344,6 +347,9 @@ void Menu::displayDoctorMenu(char* DoctorID)
 			break;
 		case 2:
 			CurrentDoctorObj->cancleAppointments();			
+			break;
+		case 4:
+			CurrentDoctorObj->viewMydata();
 			break;
 		case 3:
 		

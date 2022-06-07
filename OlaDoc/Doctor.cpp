@@ -373,6 +373,31 @@ void Doctor::respondToFeedback()
 	system("pause");
 
 
+}
+
+
+void Doctor::viewMydata()
+{
+	int x = 10;
+	system("cls");
+	cout << "========================= Information ==============================\n";
+	cout << "Name :" << this->name << endl;
+	cout << "CNIC :" << this->CNIC << endl;
+	cout << "Address :" << this->address << endl;
+	cout << "Phone :" << this->mobileNo << endl;
+	cout << "ID  :" << this->DoctorID << endl;
+	cout << "Date Of Birth :" << this->dateOfBirth << endl;
+	cout << "Email :" << this->email << endl;
+	cout << "Hourly Charge in Person :" << this->hourlyChargeInPerson << endl;
+	cout << "Hourly Charge in Video :" << this->hourlyChargeVideo << endl;
+	cout << "Balance :" << (this)->balance << endl;
+
+	cout << " =======  =======  =======  =======  =======  =======  =======  =======\n";
+
+
+
+	system("pause");
+
 
 
 
