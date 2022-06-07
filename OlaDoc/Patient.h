@@ -26,6 +26,8 @@ public:
     Patient(){    }
     friend bool Menu::PatientRegistration();
     void bookAppointment();
+    void cancleAppointment();
+
 
     //Returns doctor's ID
     char* searchDoctor();

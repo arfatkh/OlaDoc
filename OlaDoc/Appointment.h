@@ -35,7 +35,7 @@ public:
 
 
 
-	bool setStatus(char* _status);
+	bool setStatus(const char* _status);
 	bool setType();
 	bool setPatient(char* _patID);
 	bool setDoctor(char* _docID);

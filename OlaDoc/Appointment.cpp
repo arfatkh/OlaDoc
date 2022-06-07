@@ -62,7 +62,7 @@ void Appointment::generateAppoitnmentID()
 	
 }
 
-bool Appointment::setStatus(char* _status)
+bool Appointment::setStatus(const char* _status)
 {
 	// P - Pending
 	// C -Canceled

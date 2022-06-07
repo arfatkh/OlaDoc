@@ -240,6 +240,10 @@ void Menu::displayPatientMenu(char* PatientID)
 		case 2:
 			CurrentPatientObj->viewMyAppointment();
 			break;
+		case 3:
+			CurrentPatientObj->cancleAppointment();
+			break;
+
 		case 0:
 			cout << "Quitting ...\n";
 			exit(0);
@@ -292,163 +296,168 @@ void Menu::displayLoginMenu()
 	cout << "\n================ Login Menu =================\n" << endl;
 	char _tempUsername[20];
 	std::cout << "Enter  Username :";
-	std::cin.getline(_tempUsername, sizeof(_tempUsername));
+	strcpy_s(_tempUsername, "arfatkh");
+	//std::cin.getline(_tempUsername, sizeof(_tempUsername));
 
 
 
-	while (checkUserExist(_tempUsername)==-1)
-	{
-		std::cout << "User Not Found !!\n";
-
-		//std::cin.ignore(1000, '\n');
 
 
-		std::cout << "Enter  Username :";
-		std::cin.getline(_tempUsername, sizeof(_tempUsername));
-
-
-	}
-
-
-	int userType = checkUserExist(_tempUsername);
-	char _tempPass[60];
-
-
-	if (userType == 0)
-	{//For Patient
-
-
-		//bool matched = true;
-
-
-		Patient P;
-		std::ifstream fin;
-		fin.open("patients.dat", std::ios::in | std::ios::binary);
-
-		if (fin.is_open())
+		while (checkUserExist(_tempUsername) == -1)
 		{
-			while (fin.read((char*)&P, sizeof(P)))
-			{
+			std::cout << "User Not Found !!\n";
 
-				if (!strcmp(P.getUserName(), _tempUsername))
-				{
-
-					cout << "Enter Password :";
-					std::cin.getline(_tempPass, sizeof(_tempPass));
-
-					while (strcmp(P.getPassword(), _tempPass))
-					{
-						cout << "Incorrect Password!!\n";
-						cout << "Enter Password :";
-						std::cin.getline(_tempPass, sizeof(_tempPass));
-					}
+			//std::cin.ignore(1000, '\n');
 
 
+			std::cout << "Enter  Username :";
+			std::cin.getline(_tempUsername, sizeof(_tempUsername));
 
-					displayPatientMenu(P.getID());
-
-
-
-					fin.close();
-					
-
-
-					break;
-
-
-
-
-
-
-
-				}
-		
-			}
 
 		}
 
+
+		int userType = checkUserExist(_tempUsername);
+		char _tempPass[60];
+
+
+		if (userType == 0)
+		{//For Patient
+
+
+			//bool matched = true;
+
+
+			Patient P;
+			std::ifstream fin;
+			fin.open("patients.dat", std::ios::in | std::ios::binary);
+
+			if (fin.is_open())
+			{
+				while (fin.read((char*)&P, sizeof(P)))
+				{
+
+					if (!strcmp(P.getUserName(), _tempUsername))
+					{
+
+						cout << "Enter Password :";
+						std::cin.getline(_tempPass, sizeof(_tempPass));
+
+						while (strcmp(P.getPassword(), _tempPass))
+						{
+							cout << "Incorrect Password!!\n";
+							cout << "Enter Password :";
+							strcpy_s(_tempPass, "Arfat!!123");
+
+							//std::cin.getline(_tempPass, sizeof(_tempPass));
+						}
+
+
+
+						displayPatientMenu(P.getID());
+
+
+
+						fin.close();
+
+
+
+						break;
+
+
+
+
+
+
+
+					}
+
+				}
+
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+		}
+		else if (userType == 1)
+		{//For doctors
+
+
+
+
+
+			Doctor D;
+			std::ifstream fin;
+			fin.open("doctors.dat", std::ios::in | std::ios::binary);
+
+			if (fin.is_open())
+			{
+				while (fin.read((char*)&D, sizeof(D)))
+				{
+
+					if (!strcmp(D.getUserName(), _tempUsername))
+					{
+
+						cout << "Enter Password :";
+						std::cin.getline(_tempPass, sizeof(_tempPass));
+
+						while (strcmp(D.getPassword(), _tempPass))
+						{
+							cout << "Incorrect Password!!\n";
+							cout << "Enter Password :";
+							std::cin.getline(_tempPass, sizeof(_tempPass));
+						}
+
+
+
+
+						displayDoctorMenu(D.getID());
+
+						fin.close();
+
+						//displayPatientMenu();
+
+
+						break;
+
+
+
+
+
+
+
+					}
+
+				}
+
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		}
 
 
 	
-
-
-
-
-
-
-
-
-	}
-	else if (userType == 1)
-	{//For doctors
-
-
-
-
-
-		Doctor D;
-		std::ifstream fin;
-		fin.open("doctors.dat", std::ios::in | std::ios::binary);
-
-		if (fin.is_open())
-		{
-			while (fin.read((char*)&D, sizeof(D)))
-			{
-
-				if (!strcmp(D.getUserName(), _tempUsername))
-				{
-
-					cout << "Enter Password :";
-					std::cin.getline(_tempPass, sizeof(_tempPass));
-
-					while (strcmp(D.getPassword(), _tempPass))
-					{
-						cout << "Incorrect Password!!\n";
-						cout << "Enter Password :";
-						std::cin.getline(_tempPass, sizeof(_tempPass));
-					}
-
-					
-					
-
-					displayDoctorMenu(D.getID());
-
-					fin.close();
-					
-					//displayPatientMenu();
-
-
-					break;
-
-
-
-
-
-
-
-				}
-
-			}
-
-		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	}
-
-
-
 
 
 

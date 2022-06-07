@@ -290,15 +290,12 @@ char* Patient::ListAllDocs()
 	bool found = false;
 	Doctor D;
 	ifstream fin;
-	fin.open(DOCTOR_FILE_NAME, std::ios::in | std::ios::binary);
+	//fin.seekg(0);
+	fin.open("doctors.dat", std::ios::in | std::ios::binary);
 	if (fin.is_open())
 	{
 
 		int count = 1;
-
-
-		
-		
 
 		while (fin.read((char*)&D, sizeof(D)))
 		{	
@@ -310,21 +307,33 @@ char* Patient::ListAllDocs()
 
 		int choice = getIntChoice();
 	
-		while (choice>count)
+		if (count != 0)
 		{
-			cout << "Invalid Choice!!\n";
-			choice = getIntChoice();
+
+			while (choice > count)
+			{
+				cout << "Invalid Choice!!\n";
+				choice = getIntChoice();
+
+			}
+
+
+			fin.seekg(choice * sizeof(Doctor), std::ios::beg);
+			fin.read((char*)&D, sizeof(D));
+
+
+			fin.close();
+
+			return D.getID();
+
+
+
 
 		}
-
-
-		fin.seekg(choice*sizeof(Doctor),std::ios::beg);
-		fin.read((char*)&D, sizeof(D));
-
-
-		fin.close();
-
-		return D.getID();
+		else
+		{
+			cout << "\n\n================= No Record Found ======================\n\n " << endl;
+		}
 		
 
 		
@@ -337,10 +346,7 @@ char* Patient::ListAllDocs()
 
 
 	}
-	else
-	{
-		cout << "\n\n================= No Record Found ======================\n\n " << endl;
-	}
+	
 
 
 	
@@ -356,46 +362,124 @@ void Patient::viewMyAppointment()
 	Appointment A;
 	std::ifstream fin;
 	fin.open("appointments.dat", std::ios::in | std::ios::binary);
-
+	system("cls");
+	cout << "====================Your Appointment=======================\n";
 	if (fin.is_open())
 	{
 		while (fin.read((char*)&A, sizeof(A)))
 		{
 
-			if (!strcmp(A.patientID,patientID ))
+			if (!strcmp(A.patientID,patientID )) //&& strcmp(A.status,"C"))
 			{
-				fin.close();
+				cout << "Doctor ID : " << A.DoctorID << endl;
+				cout << "Appointment Status :" << A.status << endl;
+				cout << "Patient " << A.patientID << endl;
+				cout << "================================================================\n";
+				
 				found = true;
-				break;
+				
 			}
 
 
 
 		}
 
+		fin.close();
+	}
+	
+	if (!found)
+	{
+		cout << "                        No Appointments Found!                \n";
 	}
 
-	if (found)
+		
+
+	system("pause");
+
+
+
+
+
+
+
+
+
+
+}
+
+void Patient::cancleAppointment()
+{
+	bool found = false;
+
+
+
+	viewMyAppointment();
+	
+	char choice;
+
+	do
 	{
-
-		cout << "====================Your Appointment=======================\n";
-
-		cout << "Doctor ID : " << A.DoctorID<<endl;
-		cout << "Appointment Status :" << A.status<<endl;
-		cout << "Patient " << A.patientID << endl;
+		cout << "Are you sure to cancle this appointment ? [Y/N] :";
+		cin >> choice;
+	} while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n');
 
 
+	if (choice == 'y' || choice == 'Y')
+	{
+		Appointment A;
+		std::fstream file;
+		file.open("appointments.dat", std::ios::in | std::ios::out | std::ios::ate | std::ios::binary);
+		file.seekg(0);
+		if (file.is_open())
+		{
+			while (file.read((char*)&A, sizeof(A)))
+			{
+
+				if (!strcmp(A.patientID, patientID))
+				{
+					if (!strcmp(A.status, "C"))
+					{
+						cout << "Already Cancelled !!";
+						file.close();
+						break;
+					}
+					else
+					{
+						int current = file.tellp();
+						file.seekp(current - sizeof(A));
+						A.setStatus("C");
+						file.write((char*)&A, sizeof(A));
+						file.close();
+						cout << "Appointment Cancelled Successfully!\n";
+						break;
+					}
+					
+
+				}
 
 
 
-		cout << "================================================================\n";
+			}
+
+		}
+
+
+
+
 
 
 	}
 	else
-		cout << "                        No Appointments Found!                \n";
+		cout << "Okiesss !" << endl;
+
+
+
+
+
 
 	system("pause");
+
+
 
 
 

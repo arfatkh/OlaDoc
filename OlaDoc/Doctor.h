@@ -15,6 +15,7 @@ class Doctor :
     double hourlyChargeVideo = 0;
     char specialization[50] = "";
     char city[20];
+    double balance = 0;
    
     virtual  bool IDisAvailable(char* ID);
   
