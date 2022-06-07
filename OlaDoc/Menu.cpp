@@ -272,7 +272,7 @@ void Menu::displayPatientMenu(char* PatientID)
 
 	fin.close();
 	cout << "Logged Out Succesfully\n";
-	system("pause");
+
 	
 }
 
@@ -650,6 +650,10 @@ bool Menu::DoctorRegistration()
 	
 	_tempDoctor.setPassword();
 
+
+	cout << "City  :";
+	cin.getline(_tempDoctor.city, sizeof(_tempDoctor.city));
+
 	_tempDoctor.setCNIC();
 
 	_tempDoctor.setDOB();
@@ -660,7 +664,7 @@ bool Menu::DoctorRegistration()
 	cout << "Gender [ M /F / O(for Others) ] :";
 	cin.getline(_tempDoctor.gender, sizeof(_tempDoctor.gender));
 
-
+	
 	
 	cout << "Mobile No :";
 	cin.getline(_tempDoctor.mobileNo, sizeof(_tempDoctor.mobileNo));
@@ -673,9 +677,11 @@ bool Menu::DoctorRegistration()
 	cout << "\n====================== Professional Data ===================\n" << endl;
 	cout << "Leave Blank If Not Available :\n";
 
-	cout << "Hourly Charge :";
-	
-	cin >> _tempDoctor.hourlyCharge;
+	cout << "Hourly Charge [In Person]:";
+	cin >> _tempDoctor.hourlyChargeInPerson;
+
+	cout << "Hourly Charge [Video Consultation]:";
+	cin >> _tempDoctor.hourlyChargeVideo;
 	
 
 	cout << "Academic Degree :";

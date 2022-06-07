@@ -9,8 +9,8 @@ class Appointment
 {
 	const char* APPOINTMENT_FILE_NAME = "appointments.dat";
 	char appointmentID[10] = "";
-	char DoctorID[10] = "";
-	char patientID[10] = "";
+	char DoctorID[20] = "";
+	char patientID[20] = "";
 	char AppType = 'I';//I - inperson | V=- video
 
 

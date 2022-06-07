@@ -84,18 +84,18 @@ bool Appointment::setType()
 	int choice = -1;
 
 	std::cout << "Appointment Type : \n";
-	std::cout << "[1] Video \n ";
-	std::cout << "[2] In-Person\n ";
+	std::cout << "[1] Video  \n";
+	std::cout << "[2] In-Person \n";
 	std::cout << "===================\n";
-	
+	bool inValid = false;
 
 
 	choice = getIntChoice();
 
-	while (choice > 0) {
+	while (choice > 0)
 
-
-
+	{
+		inValid = false;
 		switch (choice)
 		{
 		case 1:
@@ -108,17 +108,24 @@ bool Appointment::setType()
 		default:
 			system("cls");
 			std::cout << "Invalid Choice Select Again!!!\n\n" << std::endl;
+			inValid = true;
 			break;
 		}
 	
-
+	if (inValid)
+	{
 		std::cout << "Appointment Type : \n";
 		std::cout << "[1] Video  \n";
 		std::cout << "[2] In-Person \n";
 		std::cout << "===================\n";
-	
+
 		choice = getIntChoice();
 
+	}
+	else
+		break;
+
+		
 
 	}
 

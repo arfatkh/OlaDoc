@@ -88,14 +88,17 @@ void Patient::bookAppointment()
 	Appointment A;
 	system("cls");
 	cout << "==================== Appointment Booking ==================" << endl;
-	char* DocId = searchDoctor();
+	char DocId[20]="";
+	strcpy_s(DocId,searchDoctor());
+
 
 	if (DocId)
 	{
+		A.generateAppoitnmentID();
 		A.setType();
 		A.setPatient(patientID);
 		A.setDoctor(DocId);
-
+		
 
 
 		std::ofstream fout;
@@ -116,6 +119,8 @@ void Patient::bookAppointment()
 		system("pause");
 
 	}
+	else
+		cout << "SOME ERORRR!" << endl;
 	
 
 
@@ -124,7 +129,7 @@ void Patient::bookAppointment()
 char* Patient::searchDoctor()
 {
 	int choice = -1;
-
+	
 
 	//To clear the screen
 	system("cls");
@@ -138,9 +143,10 @@ char* Patient::searchDoctor()
 
 	choice = getIntChoice();
 
-	while (choice >= 0) {
+	bool invalidInput = true;
+	while (choice >= 0 && invalidInput) {
 
-
+		invalidInput = false;
 
 		switch (choice)
 		{
@@ -158,28 +164,36 @@ char* Patient::searchDoctor()
 			//searchByCat();
 			break;
 		case 4:
-			ListAllDocs();
+			return ListAllDocs();
 			break;
 		case 0:
-			return 0;
+		{
 			break;
+		}
+			
 		default:
 			system("cls");
 			cout << "Invalid Choice Select Again!!!\n\n" << endl;
+			invalidInput = true;
 			break;
 		}
 		
-		//To clear the screen
-		system("cls");
-		cout << "\n================ Find Doctors =================\n" << endl;
-		cout << "[1] By Name" << endl;
-		cout << "[2] By City" << endl;
-		cout << "[3] By Specialization " << endl;
-		cout << "[4] List All " << endl;
-		cout << "[0] Back to MainMenu" << endl;
-		cout << "====================================\n";
+		if (invalidInput)
+		{
+			//To clear the screen
+			system("cls");
+			cout << "\n================ Find Doctors =================\n" << endl;
+			cout << "[1] By Name" << endl;
+			cout << "[2] By City" << endl;
+			cout << "[3] By Specialization " << endl;
+			cout << "[4] List All " << endl;
+			cout << "[0] Back to MainMenu" << endl;
+			cout << "====================================\n";
 
-		choice = getIntChoice();
+			choice = getIntChoice();
+
+		}
+		
 
 	}
 
@@ -187,10 +201,9 @@ char* Patient::searchDoctor()
 	
 
 
-	char* test = const_cast<char*>("D112233445");
-	return test;
+	
 
-
+	
 	
 
 
@@ -280,14 +293,17 @@ char* Patient::ListAllDocs()
 	fin.open(DOCTOR_FILE_NAME, std::ios::in | std::ios::binary);
 	if (fin.is_open())
 	{
-		cout << "\n\n================= Record Found ======================\n\n " << endl;
 
-		int count = 0;
+		int count = 1;
+
+
+		
 		
 
 		while (fin.read((char*)&D, sizeof(D)))
 		{	
-			cout <<fin.tellg() << ". Name :" << D.getName() << "\n ID:" << D.getID() <<"Cnic: " << D.getCNIC() << endl;
+			cout << "\n\n================= Doctor [" << count << "] ======================\n\n " << endl;
+			cout <<count << ". Name :" << D.getName() << "\n ID:" << D.getID() << "Cnic: " << D.getCNIC() << endl;
 			cout << "\n========================================================================\n";
 			count++;
 		}
@@ -301,9 +317,24 @@ char* Patient::ListAllDocs()
 
 		}
 
-		
+
+		fin.seekg(choice*sizeof(Doctor),std::ios::beg);
+		fin.read((char*)&D, sizeof(D));
+
 
 		fin.close();
+
+		return D.getID();
+		
+
+		
+
+
+
+
+
+		
+
 
 	}
 	else
@@ -312,11 +343,9 @@ char* Patient::ListAllDocs()
 	}
 
 
+	
 
-
-	char* test = const_cast<char*>("D112233445");
-	return test;
-
+	
 
 }
 
@@ -351,7 +380,9 @@ void Patient::viewMyAppointment()
 
 		cout << "====================Your Appointment=======================\n";
 
-		cout << "Doctor ID : " << A.DoctorID;
+		cout << "Doctor ID : " << A.DoctorID<<endl;
+		cout << "Appointment Status :" << A.status<<endl;
+		cout << "Patient " << A.patientID << endl;
 
 
 

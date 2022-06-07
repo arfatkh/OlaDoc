@@ -11,8 +11,10 @@ class Doctor :
     const char* DOCTOR_FILE_NAME = "doctors.dat";
     char DoctorID[10] = "";
     char academicDegree[50] = "";
-    double hourlyCharge=0;
+    double hourlyChargeInPerson = 0;
+    double hourlyChargeVideo = 0;
     char specialization[50] = "";
+    char city[20];
    
     virtual  bool IDisAvailable(char* ID);
   
