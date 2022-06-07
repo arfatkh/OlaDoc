@@ -1,4 +1,6 @@
 #include "Appointment.h"
+#include <iomanip>
+//#include "Menu.h"
 
 
 
@@ -73,4 +75,61 @@ bool Appointment::setStatus(char* _status)
 
 	return true;
 
+}
+
+
+bool Appointment::setType()
+{
+
+	int choice = 0;
+	std::cout << "Appointment Type : ";
+	std::cout << "[1] Video  ";
+	std::cout << "[2] In-Person ";
+	std::cout << "===================\n";
+	
+
+	
+
+	std::cout << "Select an option :";
+	std::cin >> std::setw(1) >> choice;
+
+	while (!std::cin.good())
+	{
+		//Displaying Error
+		std::cout << "Faulty  Input ! Try Again.\n";
+
+
+		//Clearing Stream
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
+
+		//Taking Input Again;
+		std::cout << "Select an option :";
+		std::cin >> std::setw(1) >> choice;
+
+	}
+
+	//Clearing Stream
+	std::cin.clear();
+	std::cin.ignore(INT_MAX, '\n');
+
+
+
+		
+
+	return true;
+
+
+}
+
+
+bool Appointment::setPatient(char* _patID)
+{
+	strcpy_s(patientID, _patID);
+
+}
+bool Appointment::setDoctor(char* _docID)
+{
+
+	strcpy_s(DoctorID, _docID);
 }

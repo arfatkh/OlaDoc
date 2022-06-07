@@ -1,10 +1,18 @@
 #include "Patient.h"
+
+#include "Appointment.h"
 #include<iostream>
 #include<fstream>
 #include<ctime>
 #include<random>
 #include <string>
 
+
+using std::cout;
+using std::endl;
+using std::cin;
+using std::ifstream;
+using std::ofstream;
 
 void Patient::generateID()
 {
@@ -70,4 +78,36 @@ bool Patient::IDisAvailable(char *ID)
 
 }
 
+void Patient::bookAppointment()
+{
+	Appointment A;
+	system("cls");
+	cout << "==================== Appointment Booking ==================" << endl;
+	char* DocId = searchDoctor();
+	A.setType();
 
+	A.setPatient(patientID);
+	A.setDoctor(DocId);
+
+
+
+	std::ofstream fout;
+	fout.open("appointments.dat", std::ios::app | std::ios::binary);
+
+	if (fout.is_open())
+	{
+		fout.write((char*)(&A), sizeof(A));
+		
+	}
+
+
+
+
+	fout.close();
+
+	cout << "Appointment Booked Successfully.!\n";
+	system("pause");
+	
+
+
+}

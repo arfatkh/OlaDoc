@@ -202,17 +202,19 @@ void Menu::displayPatientMenu(char* PatientID)
 		}
 
 	}
+
 	ClearScreen();
 	cout << "==================== Oladoc Patient Menu ==================" << endl;
 	cout << "Welcome!,  " <<  CurrentPatientObj->getName() << "\n";
 
-	cout << "[1] Add Doctor \n";
-	cout << "[2] View Doctor \n";
-	cout << "[3] Delete Doctor \n";
-	cout << "[4] Edit Doctor's Data/Schedule\n";
-	cout << "[5] View Patient \n";
-	cout << "[6] View Appoitments \n";
-	cout << "[7] Edit Appoitments \n";
+	cout << "[1] Search Doctors \n";
+	cout << "[2] View My Appointment \n";
+	cout << "[3] Cancle Appointment \n";
+	cout << "[4] Edit Appointment \n";
+	cout << "[5] View My Data\n";
+	cout << "[6] Edit My Data \n";
+	cout << "[0] Logout \n";
+
 
 	cout << "====================================\n";
 
@@ -227,8 +229,7 @@ void Menu::displayPatientMenu(char* PatientID)
 		switch (choice)
 		{
 		case 1:
-			viewDoctors();
-	
+			CurrentPatientObj->bookAppointment();
 			break;
 		case 0:
 			cout << "Quitting ...\n";
@@ -242,13 +243,15 @@ void Menu::displayPatientMenu(char* PatientID)
 		}
 
 		cout << "==================== Oladoc Patient Menu ==================" << endl;
-		cout << "[1] Add Doctor \n";
-		cout << "[2] View Doctor \n";
-		cout << "[3] Delete Doctor \n";
-		cout << "[4] Edit Doctor's Data/Schedule\n";
-		cout << "[5] View Patient \n";
-		cout << "[6] View Appoitments \n";
-		cout << "[7] Edit Appoitments \n";
+
+		cout << "[1] Search Doctors \n";
+		cout << "[2] View My Appointments \n";
+		cout << "[3] Cancle Appointment \n";
+		cout << "[4] View My Data\n";
+		cout << "[5] Edit My Data \n";
+		cout << "[0] Logout \n";
+
+
 
 		cout << "====================================\n";
 
@@ -257,19 +260,10 @@ void Menu::displayPatientMenu(char* PatientID)
 	}
 
 
-
-
-
-
-
-
-	cout << "Oladoc Patient Menu" << endl;
-	cout << "paitent cncin" << CurrentPatientObj->getCNIC() << endl;
-
-
-
-
 	fin.close();
+	cout << "Logged Out Succesfully\n";
+	system("pause");
+	
 }
 
 void Menu::displayDoctorMenu(char* DoctorID)
@@ -518,11 +512,13 @@ bool Menu::PatientRegistration()
 	ClearScreen();
 	cout << "\n\t================== PATIENT REGISTRATION PORTAL ==================\n " << endl;
 	
+	
 
 	
 	//Getting Patients Data
 		cout << "Full Name :";
 		cin.getline(_tempPatient.name, sizeof(_tempPatient.name));
+		
 		
 	
 		
@@ -627,6 +623,7 @@ bool Menu::DoctorRegistration()
 	char DOCTOR_FILE_NAME[20] = "doctors.dat";
 
 	Doctor _tempDoctor;
+
 	_tempDoctor.generateID();
 	//To clear the screen
 	ClearScreen();

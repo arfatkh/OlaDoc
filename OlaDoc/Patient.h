@@ -23,12 +23,13 @@ class Patient :
 
 public:
     virtual void  generateID();
-    Patient()
-    {
-        //Generates and assigns patient ID
-       //generateID();
-    }
+    Patient(){    }
     friend bool Menu::PatientRegistration();
+    void bookAppointment();
+
+    //Returns doctor's ID
+    char* searchDoctor();
+
     int getAge() { return age; }
     char* getID() { return patientID; }
 };
