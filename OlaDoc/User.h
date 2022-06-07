@@ -42,5 +42,9 @@ public:
 	char* getAddress();
 	char* getPassword();
 
+
+	int getIntChoice(const char* textToAdd = "Select An option :");
+
+
 };
 

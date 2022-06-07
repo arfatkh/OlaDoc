@@ -81,38 +81,46 @@ bool Appointment::setStatus(char* _status)
 bool Appointment::setType()
 {
 
-	int choice = 0;
-	std::cout << "Appointment Type : ";
-	std::cout << "[1] Video  ";
-	std::cout << "[2] In-Person ";
+	int choice = -1;
+
+	std::cout << "Appointment Type : \n";
+	std::cout << "[1] Video \n ";
+	std::cout << "[2] In-Person\n ";
 	std::cout << "===================\n";
 	
 
+
+	choice = getIntChoice();
+
+	while (choice > 0) {
+
+
+
+		switch (choice)
+		{
+		case 1:
+			AppType = 'V';
+			break;
+
+		case 2:
+			AppType = 'I';
+			break;
+		default:
+			system("cls");
+			std::cout << "Invalid Choice Select Again!!!\n\n" << std::endl;
+			break;
+		}
 	
 
-	std::cout << "Select an option :";
-	std::cin >> std::setw(1) >> choice;
+		std::cout << "Appointment Type : \n";
+		std::cout << "[1] Video  \n";
+		std::cout << "[2] In-Person \n";
+		std::cout << "===================\n";
+	
+		choice = getIntChoice();
 
-	while (!std::cin.good())
-	{
-		//Displaying Error
-		std::cout << "Faulty  Input ! Try Again.\n";
-
-
-		//Clearing Stream
-		std::cin.clear();
-		std::cin.ignore(INT_MAX, '\n');
-
-		//Taking Input Again;
-		std::cout << "Select an option :";
-		std::cin >> std::setw(1) >> choice;
 
 	}
-
-	//Clearing Stream
-	std::cin.clear();
-	std::cin.ignore(INT_MAX, '\n');
-
 
 
 		
@@ -126,10 +134,47 @@ bool Appointment::setType()
 bool Appointment::setPatient(char* _patID)
 {
 	strcpy_s(patientID, _patID);
-
+	return true;
 }
 bool Appointment::setDoctor(char* _docID)
 {
 
 	strcpy_s(DoctorID, _docID);
+	return true;
+}
+
+
+int Appointment::getIntChoice(const char* textToAdd)
+{
+
+	int choice = 0;
+
+	std::cout << textToAdd;
+	std::cin >> std::setw(1) >> choice;
+
+	while (!std::cin.good())
+	{
+		//Displaying Error
+		std::cout << "Faulty  Input ! Try Again.\n";
+
+
+		//Clearing Stream
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
+
+		//Taking Input Again;
+		std::cout << textToAdd;
+		std::cin >> choice;
+
+	}
+
+	//Clearing Stream
+	std::cin.clear();
+	std::cin.ignore(INT_MAX, '\n');
+
+
+
+
+	return choice;
+
 }

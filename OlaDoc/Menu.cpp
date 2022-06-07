@@ -33,16 +33,22 @@ void viewDoctors()
 	ifstream fin;
 	fin.open(DOCTOR_FILE_NAME, std::ios::in | std::ios::binary);
 
-	int x = 0;
-	while (fin.read((char*)&D, sizeof(D)))
+	if (fin.is_open())
 	{
-		cout << "========================================================================\n";
-		cout << " Name :" << D.getName() << "\n ID:" << D.getID() << endl;
-		cout << "========================================================================\n";
+
+
+
+
+		int x = 0;
+		while (fin.read((char*)&D, sizeof(D)))
+		{
+			cout << "========================================================================\n";
+			cout << " Name :" << D.getName() << "\n ID:" << D.getID() << endl;
+			cout << "========================================================================\n";
+
+		}
 
 	}
-
-
 	fin.close();
 
 
@@ -231,6 +237,9 @@ void Menu::displayPatientMenu(char* PatientID)
 		case 1:
 			CurrentPatientObj->bookAppointment();
 			break;
+		case 2:
+			CurrentPatientObj->viewMyAppointment();
+			break;
 		case 0:
 			cout << "Quitting ...\n";
 			exit(0);
@@ -242,6 +251,7 @@ void Menu::displayPatientMenu(char* PatientID)
 			break;
 		}
 
+		ClearScreen();
 		cout << "==================== Oladoc Patient Menu ==================" << endl;
 
 		cout << "[1] Search Doctors \n";

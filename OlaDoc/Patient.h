@@ -32,4 +32,14 @@ public:
 
     int getAge() { return age; }
     char* getID() { return patientID; }
+
+
+  //  char* searchByName();
+   // char* searchByCity();
+   // char* searchByCat();
+    char* ListAllDocs();
+    void viewMyAppointment();
+
+
+
 };

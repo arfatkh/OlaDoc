@@ -2,6 +2,7 @@
 #include "Menu.h"
 #include "Admin.h"
 
+
 class OlaDoc
 {
 	Menu MenuMain;

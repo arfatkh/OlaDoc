@@ -7,6 +7,7 @@
 #include<ctime>
 #include<random>
 #include <string>
+#include<iomanip>
 
 
 
@@ -497,3 +498,40 @@ bool User::setDOB()
 
 
 }
+
+
+int User::getIntChoice(const char* textToAdd)
+{
+
+	int choice = 0;
+
+	std::cout << textToAdd;
+	std::cin >> std::setw(1) >> choice;
+
+	while (!std::cin.good())
+	{
+		//Displaying Error
+		std::cout << "Faulty  Input ! Try Again.\n";
+
+
+		//Clearing Stream
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
+
+		//Taking Input Again;
+		std::cout << textToAdd;
+		std::cin >> choice;
+
+	}
+
+	//Clearing Stream
+	std::cin.clear();
+	std::cin.ignore(INT_MAX, '\n');
+
+
+
+
+	return choice;
+
+}
+

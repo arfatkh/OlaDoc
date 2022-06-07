@@ -29,6 +29,7 @@ class Appointment
 
 public:
 
+	friend class Patient;
 	char* getID();
 	Appointment(){}
 
@@ -39,6 +40,7 @@ public:
 	bool setPatient(char* _patID);
 	bool setDoctor(char* _docID);
 
+	int getIntChoice(const char* textToAdd = "Select An option :");
 
 
 
