@@ -28,6 +28,7 @@ public:
     Doctor();
     friend bool Menu::DoctorRegistration();
     char* getID() { return DoctorID; };
+    char* getCity() { return city; }
 
 
 

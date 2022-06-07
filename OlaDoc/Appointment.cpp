@@ -83,7 +83,7 @@ bool Appointment::setType()
 
 	int choice = -1;
 
-	std::cout << "Appointment Type : \n";
+	std::cout << "\nAppointment Type : \n";
 	std::cout << "[1] Video  \n";
 	std::cout << "[2] In-Person \n";
 	std::cout << "===================\n";

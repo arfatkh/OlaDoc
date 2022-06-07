@@ -8,7 +8,7 @@
 #include<fstream>
 #include<ctime>
 #include<random>
-#include <string>
+#include <string.h>
 
 
 
@@ -88,41 +88,48 @@ void Patient::bookAppointment()
 	Appointment A;
 	system("cls");
 	cout << "==================== Appointment Booking ==================" << endl;
-	char DocId[20]="";
-	strcpy_s(DocId,searchDoctor());
-
-
-	if (DocId)
+	
+	char DocId[20];
+	char* test = searchDoctor();
+	if (test)
 	{
-		A.generateAppoitnmentID();
-		A.setType();
-		A.setPatient(patientID);
-		A.setDoctor(DocId);
-		
+
+		strcpy_s(DocId, test);
 
 
-		std::ofstream fout;
-		fout.open("appointments.dat", std::ios::app | std::ios::binary);
 
-		if (fout.is_open())
+
+		if (DocId != 0)
 		{
-			fout.write((char*)(&A), sizeof(A));
+			A.generateAppoitnmentID();
+			A.setType();
+			A.setPatient(patientID);
+			A.setDoctor(DocId);
+
+
+
+			std::ofstream fout;
+			fout.open("appointments.dat", std::ios::app | std::ios::binary);
+
+			if (fout.is_open())
+			{
+				fout.write((char*)(&A), sizeof(A));
+
+			}
+
+
+
+
+			fout.close();
+
+			cout << "Appointment Booked Successfully!. [Appointment ID :" << A.appointmentID << "]\n";
+			system("pause");
 
 		}
-
-
-
-
-		fout.close();
-
-		cout << "Appointment Booked Successfully!. [Appointment ID :" << A.appointmentID << "]\n";
-		system("pause");
+		else
+			cout << "SOME ERORRR!" << endl;
 
 	}
-	else
-		cout << "SOME ERORRR!" << endl;
-	
-
 
 }
 
@@ -152,12 +159,12 @@ char* Patient::searchDoctor()
 		{
 		case 1:
 		{
-			//searchByName();
+			return searchByName();
 						
 			break;
 		}
 		case 2:
-			//searchByCity();
+			return searchByCity();
 			break;
 
 		case 3:
@@ -301,15 +308,210 @@ char* Patient::ListAllDocs()
 		{	
 			cout << "\n\n================= Doctor [" << count << "] ======================\n\n " << endl;
 			cout <<count << ". Name :" << D.getName() << "\n ID:" << D.getID() << "Cnic: " << D.getCNIC() << endl;
-			cout << "\n========================================================================\n";
+			//cout << "\n========================================================================\n";
 			count++;
 		}
 
-		int choice = getIntChoice();
-	
+		
 		if (count != 0)
 		{
+			cout << "\nEnter 0 to go back\r";
+			int choice = getIntChoice();
 
+			if (choice != 0)
+			{
+				while (choice > count)
+				{
+					cout << "Invalid Choice!!\n";
+					choice = getIntChoice();
+
+				}
+
+
+				fin.seekg(choice * sizeof(Doctor), std::ios::beg);
+				fin.read((char*)&D, sizeof(D));
+
+
+				fin.close();
+
+				return D.getID();
+
+
+			}
+
+		}
+		else
+		{
+			cout << "\n\n================= No Record Found ======================\n\n " << endl;
+		}
+		
+
+		
+
+			
+
+
+	}
+	
+
+
+	return (char*)'\0';
+
+	
+
+}
+
+char* Patient::searchByName()
+{
+
+
+
+	const char* DOCTOR_FILE_NAME = "doctors.dat";
+
+
+	char _temp[30];
+	cout << "Enter name :";
+	cin.getline(_temp, sizeof(_temp));
+
+
+
+
+
+	bool found = false;
+	Doctor D;
+	ifstream fin;
+	//fin.seekg(0);
+	fin.open("doctors.dat", std::ios::in | std::ios::binary);
+	if (fin.is_open())
+	{
+
+		int count = 1;
+
+		while (fin.read((char*)&D, sizeof(D)))
+		{
+			if (_strcmpi(D.getName(), _temp)==0)
+			{
+				cout << "\n\n=============================== Doctor [" << count << "] ===============================\n\n " << endl;
+				cout << count << ". Name :" << D.getName() << "\n ID:" << D.getID() << "Cnic: " << D.getCNIC() << endl;
+			//	cout << "\n========================================================================\n";
+				count++;
+
+			}
+
+		}
+
+		//testpause
+	
+		fin.close();
+	
+		
+
+		if (count > 1)
+		{
+			cout << "Enter 0 to go back\n";
+			int choice = getIntChoice();
+
+			if (choice != 0)
+			{
+				while (choice > count)
+				{
+					cout << "Invalid Choice!!\n";
+					choice = getIntChoice();
+
+				}
+
+
+				fin.open("doctors.dat", std::ios::in | std::ios::binary);
+
+				int i = 0;
+				while (fin.read((char*)&D, sizeof(D)))
+				{
+					if (!_strcmpi(D.getName(), _temp))
+					{
+						if (i == (choice - 1))
+						{
+							fin.close();
+							return D.getID();
+						}
+
+						i++;
+
+
+					}
+
+				}
+
+				return D.getID();
+
+			}
+
+
+		}
+		else
+		{
+			cout << "\n\n================= No Record Found ======================\n\n " << endl;
+		}
+
+
+
+	}
+
+
+
+	system("pause");
+
+	return (char*)'\0';
+
+
+}
+
+char* Patient::searchByCity()
+{
+
+
+
+	const char* DOCTOR_FILE_NAME = "doctors.dat";
+
+
+	char _temp[30];
+	cout << "Enter City :";
+	cin.getline(_temp, sizeof(_temp));
+
+
+
+
+
+	bool found = false;
+	Doctor D;
+	ifstream fin;
+	//fin.seekg(0);
+	fin.open("doctors.dat", std::ios::in | std::ios::binary);
+	if (fin.is_open())
+	{
+
+		int count = 1;
+
+		while (fin.read((char*)&D, sizeof(D)))
+		{
+			if (!_strcmpi(D.getCity(), _temp))
+			{
+				cout << "\n\n================= Doctor [" << count << "] ======================\n " << endl;
+				cout << count << ". Name :" << D.getName() << "\n ID:" << D.getID() << "Cnic: " << D.getCNIC() << endl;
+				//cout << "\n========================================================================\n";
+				count++;
+
+			}
+
+		}
+
+		//testpause
+		fin.close();
+
+
+
+		if (count > 1)
+		{
+			int choice = getIntChoice();
 			while (choice > count)
 			{
 				cout << "Invalid Choice!!\n";
@@ -318,11 +520,32 @@ char* Patient::ListAllDocs()
 			}
 
 
-			fin.seekg(choice * sizeof(Doctor), std::ios::beg);
-			fin.read((char*)&D, sizeof(D));
+			fin.open("doctors.dat", std::ios::in | std::ios::binary);
+
+			int i = 0;
+			while (fin.read((char*)&D, sizeof(D)))
+			{
+				if (!_strcmpi(D.getName(), _temp))
+				{
+					if (i == (choice - 1))
+					{
+						fin.close();
+						return D.getID();
+					}
+
+					i++;
 
 
-			fin.close();
+				}
+
+			}
+
+
+
+
+
+		
+
 
 			return D.getID();
 
@@ -334,26 +557,32 @@ char* Patient::ListAllDocs()
 		{
 			cout << "\n\n================= No Record Found ======================\n\n " << endl;
 		}
-		
-
-		
 
 
 
+		system("pause");
 
 
-		
+		return 0;
+
 
 
 	}
-	
-
-
-	
-
-	
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void Patient::viewMyAppointment()
 {
