@@ -19,7 +19,7 @@ class Appointment
 	DateTime appointmentTime;
 
 
-	char* generateAppoitnmentID();
+	void generateAppoitnmentID();
 	bool IDisAvailable(char* _string);
 
 

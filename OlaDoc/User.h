@@ -14,8 +14,12 @@ protected:
 	char dateOfBirth[10] = "";
 	char gender[10] = "";
 	
-	virtual void generateID()=0;//To generate random ids for users
-	virtual bool IDisAvailable(char* ID)=0; //Checks if an ID is available
+	
+	
+	
+	
+
+public:
 	
 	bool setUserName();
 	bool UserNameIsAvailable(char* _string);
@@ -23,11 +27,8 @@ protected:
 	bool setCNIC();
 	bool CNICAvailable(char* _cnic);//As per requirement both patient and doc databse will be checked
 	bool setDOB();
-
-public:
-	
-
-	
+	virtual bool IDisAvailable(char* ID) = 0; //Checks if an ID is available
+	virtual void generateID() = 0;//To generate random ids for users
 	
 
 	char* getName();

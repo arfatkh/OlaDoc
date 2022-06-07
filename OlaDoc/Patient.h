@@ -16,16 +16,17 @@ class Patient :
         char diseases[100] = "";
         int age=0;
         double balance=3500;
-       virtual void  generateID();
+       
        virtual  bool IDisAvailable(char* ID);
      
 
 
 public:
+    virtual void  generateID();
     Patient()
     {
         //Generates and assigns patient ID
-       generateID();
+       //generateID();
     }
     friend bool Menu::PatientRegistration();
     int getAge() { return age; }

@@ -34,7 +34,7 @@ bool Appointment::IDisAvailable(char* _string)
 
 }
 
-char* Appointment::generateAppoitnmentID()
+void Appointment::generateAppoitnmentID()
 {
 
 	int const IDLength = 10;
@@ -57,10 +57,7 @@ char* Appointment::generateAppoitnmentID()
 
 
 
-
-
-
-
+	
 }
 
 bool Appointment::setStatus(char* _status)
@@ -74,6 +71,6 @@ bool Appointment::setStatus(char* _status)
 
 
 
-
+	return true;
 
 }

@@ -9,7 +9,7 @@
 
 Doctor::Doctor()
 {
-	generateID();
+	//generateID();
 }
 
 

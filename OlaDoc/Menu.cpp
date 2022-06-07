@@ -1,7 +1,7 @@
 #include "Menu.h"
+
 #include <iostream>
 #include <iomanip>
-
 #include <fstream>
 
 #include"OlaDoc.h"
@@ -54,16 +54,6 @@ void viewDoctors()
 
 
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -195,16 +185,182 @@ void Menu::displayPatientMenu()
 void Menu::displayDoctorMenu()
 {
 	cout << "Oladoc Doctor Menu" << endl;
-
+	//cout<< D.getCNIC();
 
 
 }
 
 void Menu::displayLoginMenu()
 {
-	cout << "Login Menu" << endl;
+	ClearScreen();
 
-	displayAdminMenu();
+
+	cout << "\n================ Login Menu =================\n" << endl;
+	char _tempUsername[20];
+	std::cout << "Enter  Username :";
+	std::cin.getline(_tempUsername, sizeof(_tempUsername));
+
+
+
+	while (checkUserExist(_tempUsername)==-1)
+	{
+		std::cout << "User Not Found !!\n";
+
+		//std::cin.ignore(1000, '\n');
+
+
+		std::cout << "Enter  Username :";
+		std::cin.getline(_tempUsername, sizeof(_tempUsername));
+
+
+	}
+
+
+	int userType = checkUserExist(_tempUsername);
+	char _tempPass[60];
+
+
+	if (userType == 0)
+	{//For Patient
+
+
+		//bool matched = true;
+
+
+		Patient P;
+		std::ifstream fin;
+		fin.open("patients.dat", std::ios::in | std::ios::binary);
+
+		if (fin.is_open())
+		{
+			while (fin.read((char*)&P, sizeof(P)))
+			{
+
+				if (!strcmp(P.getUserName(), _tempUsername))
+				{
+
+					cout << "Enter Password :";
+					std::cin.getline(_tempPass, sizeof(_tempPass));
+
+					while (strcmp(P.getPassword(), _tempPass))
+					{
+						cout << "Incorrect Password!!\n";
+						cout << "Enter Password :";
+						std::cin.getline(_tempPass, sizeof(_tempPass));
+					}
+
+
+					cout << "loggined as " << P.getName() << endl;
+
+					//displayPatientMenu(P);
+
+
+
+					fin.close();
+					//displayPatientMenu();
+
+
+					break;
+
+
+
+
+
+
+
+				}
+		
+			}
+
+		}
+
+
+
+	
+
+
+
+
+
+
+
+
+	}
+	else if (userType == 1)
+	{//For doctors
+
+
+
+
+
+		Doctor D;
+		std::ifstream fin;
+		fin.open("doctors.dat", std::ios::in | std::ios::binary);
+
+		if (fin.is_open())
+		{
+			while (fin.read((char*)&D, sizeof(D)))
+			{
+
+				if (!strcmp(D.getUserName(), _tempUsername))
+				{
+
+					cout << "Enter Password :";
+					std::cin.getline(_tempPass, sizeof(_tempPass));
+
+					while (strcmp(D.getPassword(), _tempPass))
+					{
+						cout << "Incorrect Password!!\n";
+						cout << "Enter Password :";
+						std::cin.getline(_tempPass, sizeof(_tempPass));
+					}
+
+					
+					cout << "loggined as " << D.getName() << endl;
+
+					//displayDoctorMenu(D);
+
+					fin.close();
+					
+					//displayPatientMenu();
+
+
+					break;
+
+
+
+
+
+
+
+				}
+
+			}
+
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	}
+
+
+
+
+
+
+	system("pause");
+	
 
 
 
@@ -269,6 +425,7 @@ bool Menu::PatientRegistration()
 	char PATIENT_FILE_NAME[20] = "patients.dat";
 
 	Patient _tempPatient;
+	_tempPatient.generateID();
 	ClearScreen();
 	cout << "\n\t================== PATIENT REGISTRATION PORTAL ==================\n " << endl;
 	
@@ -376,12 +533,12 @@ bool Menu::PatientRegistration()
 
 }
 
-
 bool Menu::DoctorRegistration()
 {
 	char DOCTOR_FILE_NAME[20] = "doctors.dat";
 
 	Doctor _tempDoctor;
+	_tempDoctor.generateID();
 	//To clear the screen
 	ClearScreen();
 	cout << "\n\t================== DOCTOR REGISTRATION PORTAL ==================\n " << endl;
@@ -478,6 +635,67 @@ bool Menu::DoctorRegistration()
 
 
 }
+
+
+
+
+int Menu::checkUserExist(char* _username)
+{
+
+	Doctor D;
+	ifstream fin;
+	fin.open("doctors.dat", std::ios::in | std::ios::binary);
+
+	if (fin.is_open())
+	{
+		while (fin.read((char*)&D, sizeof(D)))
+		{
+
+			if (!strcmp(D.getUserName(), _username))
+			{
+				fin.close();
+				return 1;
+			}
+
+
+		}
+
+	}
+
+
+
+	//Check in Patients Data
+	Patient P;
+
+	ifstream fin1;
+	fin1.open("patients.dat", std::ios::in | std::ios::binary);
+
+	while (fin1.read((char*)&P, sizeof(P)))
+	{
+
+		if (!strcmp(P.getUserName(), _username))
+		{
+			fin.close();
+			return 0;
+		}
+
+
+
+	}
+
+
+	//Not found
+	return -1;
+
+}
+
+
+
+
+
+
+
+
 
 
 

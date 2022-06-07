@@ -1,4 +1,7 @@
 #pragma once
+
+#include "Patient.h"
+#include "Doctor.h"
 class Menu
 {
 public:
@@ -11,6 +14,9 @@ public:
 	void displayRegisterMenu(); //Menu for Registring new users
 	bool PatientRegistration(); // Specific for patient's Registration.
 	bool DoctorRegistration(); //Specific for Doctors's Registration.
+	
+	//Returns -1 for not found [0 for patient][1 for doctor]
+	int checkUserExist(char* _username);
 
 
 	void ClearScreen();

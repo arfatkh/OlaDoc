@@ -13,7 +13,7 @@ class Doctor :
     char academicDegree[50] = "";
     double hourlyCharge=0;
     char specialization[50] = "";
-    virtual void  generateID();
+   
     virtual  bool IDisAvailable(char* ID);
   
 
@@ -21,6 +21,7 @@ class Doctor :
 
 
 public:
+    virtual void  generateID();
     Doctor();
     friend bool Menu::DoctorRegistration();
     char* getID() { return DoctorID; };
