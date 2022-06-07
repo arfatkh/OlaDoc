@@ -31,12 +31,13 @@ public:
 
     //Returns doctor's ID
     char* searchDoctor();
+    char* searchByCity();
 
     int getAge() { return age; }
     char* getID() { return patientID; }
 
 
-  //  char* searchByName();
+    char* searchByName();
    // char* searchByCity();
    // char* searchByCat();
     char* ListAllDocs();

@@ -343,6 +343,17 @@ bool User::setCNIC()
 
 		}
 
+	/*	for (char& ch : _tempCNIC)
+		{
+
+			if (ch == 0)
+				break;
+
+			if (!isaplha())
+				ValidCNIC = false;
+
+		}*/
+
 
 	} while (!ValidCNIC);
 
@@ -505,7 +516,7 @@ int User::getIntChoice(const char* textToAdd)
 
 	int choice = 0;
 
-	std::cout << textToAdd;
+	std::cout<<"\n" << textToAdd;
 	std::cin >> std::setw(1) >> choice;
 
 	while (!std::cin.good())

@@ -297,9 +297,22 @@ void Menu::displayLoginMenu()
 	char _tempUsername[20];
 	std::cout << "Enter  Username :";
 	strcpy_s(_tempUsername, "arfatkh");
+	
 	//std::cin.getline(_tempUsername, sizeof(_tempUsername));
+	//while (cin.fail())
+	//{
 
+	//	cin.ignore(1000,'\n');
+	//	cin.clear();
+	//	std::cout << "Yeh kaisa input hai bhaiii!! Dobara kro" << std::endl;
+	//	std::cout << "Enter  Username :";
+	//	cin.ignore(1000, '\n');
+	//	//strcpy_s(_tempUsername, "arfatkh");
+	//	std::cin.getline(_tempUsername, sizeof(_tempUsername));
+	//	
 
+	//}
+	//
 
 
 
@@ -341,15 +354,34 @@ void Menu::displayLoginMenu()
 					{
 
 						cout << "Enter Password :";
-						std::cin.getline(_tempPass, sizeof(_tempPass));
+				/*		std::cin.getline(_tempPass, sizeof(_tempPass));
+
+						while (cin.fail())
+						{
+
+							cin.ignore(1000, '\n');
+							cin.clear();
+							std::cout << "Yeh kaisa input hai bhaiii!! Touba  kro" << std::endl;
+							cout << "Enter Password :";
+							cin.ignore(1000, '\n');
+							std::cin.getline(_tempPass, sizeof(_tempPass));
+
+
+						}*/
+						strcpy_s(_tempPass, "Arfat!!123");
+
+
 
 						while (strcmp(P.getPassword(), _tempPass))
 						{
 							cout << "Incorrect Password!!\n";
 							cout << "Enter Password :";
-							strcpy_s(_tempPass, "Arfat!!123");
+							//strcpy_s(_tempPass, "Arfat!!123");
 
-							//std::cin.getline(_tempPass, sizeof(_tempPass));
+
+
+
+							std::cin.getline(_tempPass, sizeof(_tempPass));
 						}
 
 
