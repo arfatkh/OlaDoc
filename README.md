@@ -21,4 +21,4 @@ Following are the main Module of Oladoc
 
 ## UML Class Diagram
 
-<img src="https://github.com/arfatkh/OlaDoc/blob/LoginTest/imgs/UML.jpg" width="980" height="720">
+<img src="https://github.com/arfatkh/OlaDoc/blob/LoginTest/imgs/UML.jpg" width="720" height="720">
